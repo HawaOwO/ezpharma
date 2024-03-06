@@ -1,0 +1,73 @@
+<!-- login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+  <title>Login Page</title>
+</head>
+<body>
+
+<div class="container mt-5">
+  <h2>Login</h2>
+  <form id="loginForm">
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input type="text" class="form-control" id="username" name="username" required>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" id="password" name="password" required>
+    </div>
+    <button type="button" class="btn btn-primary" onclick="submitForm()">Login</button>
+  </form>
+</div>
+
+<!-- Include Firebase JavaScript SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js"></script>
+
+<!-- Your Firebase Config -->
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyCrAH8oV-uyEdlWH3uNRgWhRh8Pjler4fk",
+    authDomain: "dentalpro-2a34a.firebaseapp.com",
+    databaseURL: "https://dentalpro-2a34a-default-rtdb.firebaseio.com",
+    projectId: "dentalpro-2a34a",
+    storageBucket: "dentalpro-2a34a.appspot.com",
+    messagingSenderId: "365392282595",
+    appId: "1:365392282595:web:9af6ec80ca1545a61616d6",
+    measurementId: "G-TVTLCXW8WE"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/login.js"></script>
+
+<script>
+  function submitForm() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+  
+    const auth = firebase.auth();
+    
+    auth.signInWithEmailAndPassword(username, password)
+        .then((userCredential) => {
+            // Redirect to index.html after successful login
+            window.location.href = 'index.html';
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.error('Error:', errorMessage);
+            alert('Login failed. Please check your credentials.');
+        });
+  }
+</script>
+
+</body>
+</html>
