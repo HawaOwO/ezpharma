@@ -1,23 +1,32 @@
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+import { getDatabase, set, ref } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
-function submitForm() {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+const auth = getAuth();
 
-    const auth = getAuth();
+        login.addEventListener('click', (e)=>{
 
-    signInWithEmailAndPassword(auth, username, password)
-        .then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user;
-            console.log('Login successful!', user);
-            // Redirect or perform actions after successful login
-            alert('Login successful!');
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+
+            signInWithEmailAndPassword(auth, email, password)
+                        .then((userCredential) => {
+                            // Signed in 
+                            const user = userCredential.user;
+                            alert('user loged in!');
+
+                            window.location.href='index.html';
+
+                            // set(ref(database, 'User/' + user.uid, {
+                            //     username:username,
+                            //     email:email
+                            // }))
+                            // ...
+                        })
+                        .catch((error) => {
+                            const errorCode = error.code;
+                            const errorMessage = error.message;
+
+                            alert(errorMessage);
+                        });
+
         })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.error('Error:', errorMessage);
-            alert('Login failed. Please check your credentials.');
-        });
-}

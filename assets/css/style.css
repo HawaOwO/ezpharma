@@ -405,6 +405,18 @@ body {
 .recentCustomers table tr:hover td h4 span {
   color: var(--white);
 }
+/* Add this style to your CSS */
+.modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+  z-index: 1000;
+}
 
 /* ====================== Responsive Design ========================== */
 @media (max-width: 991px) {
