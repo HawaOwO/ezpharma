@@ -9,17 +9,6 @@ const database = getDatabase();
 // Reference to the "User" node in your database
 const medicationRef = ref(database, 'Medication');
 
-// Function to open the modal
-function openModal() {
-    const modal = document.getElementById('addMedModal');
-    modal.style.display = 'block';
-}
-// Function to close the modal
-function closeModal() {
-    const modal = document.getElementById('addMedModal');
-    modal.style.display = 'none';
-}
-
 // Function to populate the table with user data
 function populateMedicationData(snapshot) {
     // Clear existing table rows
@@ -44,37 +33,10 @@ function populateMedicationData(snapshot) {
     });
 }
 
-
-
 // // Retrieve data once and populate the table
 get(medicationRef).then((snapshot) => {
     populateMedicationData(snapshot);
 }).catch((error) => {
     console.error("Error getting data:", error);
 });
-
-
-// Attach an event listener to the "Add Medication" button// Wait for the DOM to fully load before adding the event listener
-document.addEventListener('DOMContentLoaded', function () {
-    // Function to open the modal
-    function openModal() {
-        const modal = document.getElementById('addMedModal');
-        modal.style.display = 'block';
-    }
-
-    // Attach an event listener to the "Add Medication" button
-    document.querySelector('.btn').addEventListener('click', function () {
-        openModal();
-        // Adding a click event for the button within this function
-        // Adding a click event for the "Add Medication" button within this function
-        document.getElementById('addMedForm').addEventListener('submit', function (event) {
-            event.preventDefault(); // Prevent the form from submitting
-
-            // Validate and handle the form submission here
-            addNewMedication();
-    });
-});
-});
-
-document.getElementById('cancelButton').addEventListener('click', closeModal);
 

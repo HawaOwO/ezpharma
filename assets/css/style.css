@@ -28,6 +28,37 @@ body {
   width: 100%;
 }
 
+.containerP {
+  display: flex;
+  position: relative;
+  width: 100%; 
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.profileP {
+  width: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #45a049;
+}
 /* =============== Navigation ================ */
 .navigation {
   position: fixed;
@@ -259,13 +290,13 @@ body {
   color: var(--white);
 }
 
-/* ================== Order Details List ============== */
+/* ================== Order Details List ============== width used to be 100%*/
 .details {
   position: relative;
-  width: 100%;
+  width: 100%; 
   padding: 20px;
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  /* grid-template-columns: 2fr 1fr; */
   grid-gap: 30px;
   /* margin-top: 10px; */
 }
@@ -417,6 +448,123 @@ body {
   border: 1px solid #ccc;
   z-index: 1000;
 }
+
+.select-container {
+  position: relative;
+  display: inline-block;
+  margin-right: 10px;
+   /* Adjust spacing as needed */
+}
+
+#medicationType {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+#medicationType::-ms-expand {
+  display: none;
+}
+
+.select-container::after {
+  /* content: '\25BC'; Unicode character for down arrow */
+  font-size: 20px;
+  color: #555;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+
+/*form*/
+.form-group {
+  margin-bottom: 15px; /* Adjust the margin to add space between groups */
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px; /* Add some space between label and input */
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+.form-group select {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+/* Optional: Add light gray background */
+.form-group {
+  background-color: #f5f5f5; /* Light gray color */
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+.form-group.date-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group.date-group .date-inputs {
+  display: flex;
+  justify-content: space-between; /* Add space between day, month, and year */
+  
+}
+
+.form-group.date-group .date-inputs input {
+  margin-right: 10px;
+  box-sizing: border-box;
+  width: 30%; /* Adjust the width as needed */
+}
+
+
+.form-group.date-group .date-inputs select {
+  box-sizing: border-box;
+  width: 25%; /* Adjust the width as needed */
+}
+
+#saveData {
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  width: calc(50% - 5px);
+  transition: background-color 0.3s;
+}
+
+#saveData:hover {
+  background-color: #45a049;
+}
+
+#cancelButton {
+  background-color: #ccc;
+  color: #333;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 0;
+  width:calc(50% - 5px);
+  transition: background-color 0.3s;
+}
+
+#cancelButton:hover {
+  background-color: #999;
+}
+
 
 /* ====================== Responsive Design ========================== */
 @media (max-width: 991px) {

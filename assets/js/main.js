@@ -1,3 +1,4 @@
+import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 // add hovered class to selected list item
 let list = document.querySelectorAll(".navigation li");
 
@@ -19,3 +20,4 @@ toggle.onclick = function () {
   navigation.classList.toggle("active");
   main.classList.toggle("active");
 };
+
