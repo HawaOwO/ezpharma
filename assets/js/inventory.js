@@ -3,11 +3,15 @@ import { getDatabase, ref, get, push, child, orderByChild, equalTo } from "https
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
+//const auth = getAuth();
 // Get a reference to the database
 const database = getDatabase();
 
 // Reference to the "User" node in your database
 const medicationRef = ref(database, 'Medication');
+
+//const logoutButton = document.getElementById('logoutButton');
+
 
 // Function to open the modal
 function openModal() {
@@ -73,6 +77,16 @@ document.addEventListener('DOMContentLoaded', function () {
             // Validate and handle the form submission here
             addNewMedication();
     });
+    // logoutButton.addEventListener('click', () => {
+    //     // Sign out the user
+    //     auth.signOut().then(() => {
+    //         // Redirect the user to the login page
+    //         window.location.href = 'login.html';
+    //     }).catch((error) => {
+    //         // Handle any errors that occur during sign out
+    //         console.error('Error signing out:', error);
+    //     });
+    //   });
 });
 });
 

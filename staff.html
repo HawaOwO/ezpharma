@@ -70,23 +70,23 @@
                     </a>
                 </li>
 
-                <li>
+                <!-- <li>
                     <a href="profile.html">
                         <span class="icon">
                             <ion-icon name="settings-outline"></ion-icon>
                         </span>
                         <span class="title">Profile</span>
                     </a>
-                </li>
+                </li> -->
 
-                <li>
+                <!-- <li>
                     <a href="#">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>
                         <span class="title">Sign Out</span>
                     </a>
-                </li>
+                </li> -->
             </ul>
         </div>
 
@@ -95,10 +95,6 @@
             <div class="topbar">
                 <div class="toggle">
                     <ion-icon name="menu-outline"></ion-icon>
-                </div>
-
-                <div class="user">
-                    <img src="assets/imgs/customer01.jpg" alt="">
                 </div>
             </div>
 
@@ -133,15 +129,36 @@
                             <span class="close" onclick="closeModal()">&times;</span>
                             <h2>Add New User</h2>
                             <form id="addUserForm">
+                                <div class="form-group">
                                 <label for="newFirstName">First Name:</label>
                                 <input type="text" id="newFirstName" name="newFirstName" required>
+                                </div>
+                                <div class="form-group">
                                 <label for="newLastName">Last Name:</label>
                                 <input type="text" id="newLastName" name="newLastName" required>
+                                </div>
+                                <div class="form-group">
                                 <label for="newEmail">Email:</label>
                                 <input type="email" id="newEmail" name="newEmail" required>
+                                </div>
+                                <div class="form-group">
+                                <label for="newPhone">Phone:</label>
+                                <input type="text" id="newPhone" name="newPhone" required>
+                                </div>
+                                <div class="form-group">
+                                    <select id="newRole" name="newRole" required>
+                                        <option value="Admin">Admin</option>
+                                        <option value="User">User</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
                                 <label for="newPassword">Password:</label>
                                 <input type="password" id="newPassword" name="newPassword" required>
-                                <button type="button" onclick="addNewUser()">Add User</button>
+                                </div>
+                                <!-- <button type="button" onclick="addNewUser()">Add User</button> -->
+                                <button type="button" id="saveData">Add User</button>
+
+                                <button type="button" id="cancelButton" onclick="closeModal()">Cancel</button>
                             </form>
                         </div>
                     </div>
@@ -160,6 +177,112 @@
 <!-- Import Firebase SDK and your JavaScript file -->
 <script type="module" src="assets/js/firebase-config.js"></script>
 <script type="module" src="assets/js/staff.js"></script> 
+
+
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    import { getDatabase, ref, set, onValue, update, remove } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+
+    const firebaseConfig = {
+    apiKey: "AIzaSyCrAH8oV-uyEdlWH3uNRgWhRh8Pjler4fk",
+    authDomain: "dentalpro-2a34a.firebaseapp.com",
+    databaseURL: "https://dentalpro-2a34a-default-rtdb.firebaseio.com",
+    projectId: "dentalpro-2a34a",
+    storageBucket: "dentalpro-2a34a.appspot.com",
+    messagingSenderId: "365392282595",
+    appId: "1:365392282595:web:9af6ec80ca1545a61616d6",
+    measurementId: "G-TVTLCXW8WE"
+  };
+  
+      // Initialize Firebase
+       const app = initializeApp(firebaseConfig);
+       const database = getDatabase(app);
+       const auth = getAuth(app); // Initialize the auth variable
+  
+    //   saveData.addEventListener('click',(e) => {
+
+    //     var newFirstName = document.getElementById('newFirstName').value;
+    //     var newLastName = document.getElementById('newLastName').value;
+    //     var newEmail = document.getElementById('newEmail').value;
+    //     var newPassword = document.getElementById('newPassword').value;
+    //     var newPhone = document.getElementById('newPhone').value;
+    //     var newRole = document.getElementById('newRole').value;
+
+    //     // Generate username using first name and last name
+    //     var newUsername = newFirstName + newLastName;
+
+    //   set(ref(database, 'User/' + newFirstName + newLastName ), {
+  
+    //     firstName: newFirstName,
+    //     lastName: newLastName,
+    //     username: newUsername,
+    //     email: newEmail,
+    //     phone: newPhone,
+    //     role: newRole,
+    //     profilePicture: ""
+  
+    //    }).then(() => {
+    //         // After saving user data to the database, create user in Firebase Authentication
+    //         createUserWithEmailAndPassword(auth, newEmail, newPassword)
+    //             .then((userCredential) => {
+    //                 closeModal();
+    //                 alert('User added successfully!');
+    //             })
+    //             .catch((error) => {
+    //                 console.error('Error adding user:', error.message);
+    //                 alert('Error adding user. Please check your input and try again.');
+    //             });
+    //     }).catch((error) => {
+    //         console.error('Error saving user data:', error.message);
+    //         alert('Error saving user data. Please try again.');
+    //     });
+    //   });
+
+    saveData.addEventListener('click',(e) => {
+    var newFirstName = document.getElementById('newFirstName').value;
+    var newLastName = document.getElementById('newLastName').value;
+    var newEmail = document.getElementById('newEmail').value;
+    var newPassword = document.getElementById('newPassword').value;
+    var newPhone = document.getElementById('newPhone').value;
+    var newRole = document.getElementById('newRole').value;
+
+    // Generate username using first name and last name
+    var newUsername = newFirstName + newLastName;
+
+    // Create user in Firebase Authentication first
+    createUserWithEmailAndPassword(auth, newEmail, newPassword)
+        .then((userCredential) => {
+            // Get the UID of the newly created user
+            const uid = userCredential.user.uid;
+
+            // Use the UID as the identifier in the database
+            set(ref(database, 'User/' + uid), {
+                firstName: newFirstName,
+                lastName: newLastName,
+                username: newUsername,
+                email: newEmail,
+                phone: newPhone,
+                role: newRole,
+                profilePicture: ""
+            }).then(() => {
+                closeModal();
+                alert('User added successfully!');
+            }).catch((error) => {
+                console.error('Error saving user data:', error.message);
+                alert('Error saving user data. Please try again.');
+            });
+        })
+        .catch((error) => {
+            console.error('Error adding user:', error.message);
+            alert('Error adding user. Please check your input and try again.');
+        });
+});
+
+  
+  </script>
+
 
 <!-- ====== ionicons ======= -->
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

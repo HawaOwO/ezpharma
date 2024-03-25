@@ -13,9 +13,6 @@ const usersRef = ref(database, 'User');
 function openModal() {
     const modal = document.getElementById('addUserModal');
     modal.style.display = 'block';
-
-    // // Clear the form when opening the modal
-    // document.getElementById('addUserForm').reset();
 }
 // Function to close the modal
 function closeModal() {
@@ -52,34 +49,27 @@ get(usersRef).then((snapshot) => {
     console.error("Error getting data:", error);
 });
 
+// Attach an event listener to the "Add Medication" button// Wait for the DOM to fully load before adding the event listener
+document.addEventListener('DOMContentLoaded', function () {
+    // Function to open the modal
+    function openModal() {
+        const modal = document.getElementById('addUserModal');
+        modal.style.display = 'block';
+    }
 
-// Function to add a new user
-function addNewUser() {
-    const newFirstName = document.getElementById('newFirstName').value;
-    const newLastName = document.getElementById('newLastName').value;
-    const newEmail = document.getElementById('newEmail').value;
-    const newPassword = document.getElementById('newPassword').value;
+    // Attach an event listener to the "Add Medication" button
+    document.querySelector('.btn').addEventListener('click', function () {
+        openModal();
+        // Adding a click event for the button within this function
+        // Adding a click event for the "Add Medication" button within this function
+        document.getElementById('addUserForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the form from submitting
 
-    // Add the new user to the Realtime Database
-    // (You should also add proper error handling and validation)
-    const newUserRef = push(ref(database, 'User'));
-    set(newUserRef, {
-        firstName: newFirstName,
-        lastName: newLastName,
-        email: newEmail,
-        phone: '', // Add more fields if needed
-        role: 'user' // Default role, update as needed
+            // Validate and handle the form submission here
+            addNewUser();
     });
 
-    // Add the new user to Firebase Authentication
-    // (You should also add proper error handling and validation)
-    createUserWithEmailAndPassword(auth, newEmail, newPassword)
-        .then((userCredential) => {
-            closeModal();
-            alert('User added successfully!');
-        })
-        .catch((error) => {
-            console.error('Error adding user:', error.message);
-            alert('Error adding user. Please check your input and try again.');
-        });
-}
+});
+});
+
+document.getElementById('cancelButton').addEventListener('click', closeModal);

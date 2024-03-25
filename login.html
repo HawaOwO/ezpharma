@@ -1,9 +1,63 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>Login</title>
-<link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #8692f7; /* Choose your desired background color */
+        }
+
+        #login-box {
+            width: 300px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        #login-box h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        #login-box input[type="text"],
+        #login-box input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        #login-box input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #2a2185; /* Choose your desired button color */
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #login-box input[type="submit"]:hover {
+            background-color: #2a2185; /* Choose your desired button hover color */
+        }
+    </style>
 </head>
+
 
 <body>
   
