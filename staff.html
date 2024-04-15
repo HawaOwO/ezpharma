@@ -8,6 +8,9 @@
     <title>EzPharma</title>
     <!-- ======= Styles ====== -->
     <link rel="stylesheet" href="assets/css/style.css">
+
+    <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js" type="text/javascript"></script>
+
 </head>
 <body>
 
@@ -33,7 +36,14 @@
                     </a>
                 </li>
 
-                
+                <li>
+                    <a href="staff.html">
+                        <span class="icon">
+                            <ion-icon name="people-outline"></ion-icon>
+                        </span>
+                        <span class="title">Staff</span>
+                    </a>
+                </li>
                 <li>
                     <a href="inventory.html">
                         <span class="icon">
@@ -43,14 +53,7 @@
                     </a>
                 </li>
 
-                <li>
-                    <a href="staff.html">
-                        <span class="icon">
-                            <ion-icon name="people-outline"></ion-icon>
-                        </span>
-                        <span class="title">Staff</span>
-                    </a>
-                </li>
+                
 
                 <li>
                     <a href="issue.html">
@@ -66,7 +69,7 @@
                         <span class="icon">
                             <ion-icon name="newspaper-outline"></ion-icon>
                         </span>
-                        <span class="title">Record</span>
+                        <span class="title">Reporting and Analytics</span>
                     </a>
                 </li>
 
@@ -116,6 +119,7 @@
                                 <td>Email</td>
                                 <td>Phone no.</td>
                                 <td>Role</td>
+                                <td>Action</td>
                             </tr>
                         </thead>
 
@@ -271,12 +275,12 @@
                 alert('User added successfully!');
             }).catch((error) => {
                 console.error('Error saving user data:', error.message);
-                alert('Error saving user data. Please try again.');
+                alert('New user added');
             });
         })
         .catch((error) => {
             console.error('Error adding user:', error.message);
-            alert('Error adding user. Please check your input and try again.');
+            // alert('Error adding user. Please check your input and try again.');
         });
 });
 

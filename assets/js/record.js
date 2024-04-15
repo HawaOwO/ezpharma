@@ -9,6 +9,7 @@ const database = getDatabase();
 // Reference to the "User" node in your database
 const recordRef = ref(database, 'Record');
 
+
 // Function to populate the table with user data
 function populateRecordData(snapshot) {
     // Clear existing table rows
@@ -31,6 +32,50 @@ function populateRecordData(snapshot) {
         tbody.appendChild(newRow);
     });
 }
+
+// // Add event listener to the button
+// downloadReportBtn.addEventListener('click', () => {
+//     // Get the table content
+//     const table = document.querySelector('table');
+//     const tableContent = table.outerHTML;
+
+//     // Create a Blob with the table content
+//     const blob = new Blob([tableContent], { type: 'text/html' });
+
+//     // Create a link element
+//     const downloadLink = document.createElement('a');
+//     downloadLink.href = URL.createObjectURL(blob);
+
+//     // Set the file name
+//     downloadLink.download = 'report.html';
+
+//     // Append the link to the body and trigger the download
+//     document.body.appendChild(downloadLink);
+//     downloadLink.click();
+
+//     // Cleanup
+//     document.body.removeChild(downloadLink);
+// });
+
+
+
+// Get a reference to the download button
+const downloadReportBtn = document.getElementById('downloadReportBtn');
+
+// Add event listener to the button
+downloadReportBtn.addEventListener('click', () => {
+    // Initialize jsPDF
+    const doc = new jsPDF();
+
+    // Add the table content to the PDF
+    doc.autoTable({ html: 'table' });
+
+    // Save the PDF
+    doc.save('report.pdf');
+});
+
+
+
 
 // Retrieve data once and populate the table
 get(recordRef).then((snapshot) => {

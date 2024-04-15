@@ -1,5 +1,5 @@
 // Import the Firebase functions you need
-import { getDatabase, ref, get, push, } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+import { getDatabase, ref, get, push, remove } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
@@ -38,9 +38,56 @@ function populateIssueData(snapshot) {
             <td>${issue.username}</td>
             <td>${issue.status}</td>
             <td>${date}</td>
+            <td><button class="edit-button" data-key="${issueSnapshot.key}">Edit</button></td>
+            <td><button class="delete-button" data-key="${issueSnapshot.key}"  style="background-color: red; color: white;">Delete</button></td>
             
         `;
         tbody.appendChild(newRow);
+    });
+}
+
+function deleteIssue(issueKey) {
+    if (confirm("Are you sure you want to delete this issue?")) {
+        // Remove the issue from the database
+        remove(ref(database, `Issue/${issueKey}`)).then(() => {
+            // Issue deleted successfully
+            alert("Issue deleted successfully");
+        }).catch((error) => {
+            // Error occurred while deleting 
+            console.error("Error deleting issue:", error);
+        });
+    }
+}
+
+// Function to populate the form fields with existing medication data for editing
+function editIssue(issueKey) {
+    // Get a reference to the medication node in the database
+    const issueRef = ref(database, `Issue/${issueKey}`);
+
+    // Fetch the medication data from the database
+    get(issueRef).then((snapshot) => {
+        // Get the medication data
+        const issue = snapshot.val();
+        console.log("Issue data:", issue);
+        console.log("Snapshot:", snapshot.val());
+
+        // Populate the form fields with existing medication data for editing
+        document.getElementById('issueName').value = issue.name;
+        document.getElementById('issueUsername').value = issue.username;
+        document.getElementById('issueDescription').value = issue.description;
+        document.getElementById('issueStatus').value = issue.status;
+        document.getElementById('issueDay').value = issue.day;
+        document.getElementById('issueMonth').value = issue.month;
+        document.getElementById('issueYear').value = issue.year;
+
+        // Store the medication key in a hidden input field
+        document.getElementById('issueKey').value = issueKey;
+
+        // Open the modal for editing
+        openModal();
+    }).catch((error) => {
+        // Error occurred while fetching medication data
+        console.error("Error fetching issue data:", error);
     });
 }
 
@@ -73,4 +120,21 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 });
+// Dynamically attach click event listeners to edit buttons
+document.addEventListener('click', function(event) {
+    if (event.target.classList.contains('edit-button')) {
+        const issueKey = event.target.dataset.key;
+        editIssue(issueKey);
+    }
+});
+
+// Dynamically attach click event listeners to delete buttons
+document.addEventListener('click', function(event) {
+    if (event.target.classList.contains('delete-button')) {
+        const issueKey = event.target.dataset.key;
+        deleteIssue(issueKey);
+    }
+});
+
 document.getElementById('cancelButton').addEventListener('click', closeModal);
+

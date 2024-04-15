@@ -1,5 +1,5 @@
 // Import the Firebase functions you need
-import { getDatabase, ref, get, push, } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+import { getDatabase, ref, get, push,remove } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
@@ -37,9 +37,25 @@ function populateUserData(snapshot) {
             <td>${user.email}</td>
             <td>${user.phone}</td>
             <td>${user.role}</td>
+            <td><button class="delete-button" data-key="${userSnapshot.key}"  style="background-color: red; color: white;">Delete</button></td>
+
         `;
         tbody.appendChild(newRow);
     });
+}
+
+function deleteUser(userKey) {
+    if (confirm("Are you sure you want to delete this user?")) {
+        // Remove the medication from the database
+        remove(ref(database, `User/${userKey}`)).then(() => {
+            // Medication deleted successfully
+            alert("User deleted successfully");
+        }).catch((error) => {
+            // Error occurred while deleting medication
+            console.error("Error deleting user:", error);
+            alert("Error deleting medication. Please try again later.");
+        });
+    }
 }
 
 // Retrieve data once and populate the table
@@ -71,5 +87,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 });
+
+// Dynamically attach click event listeners to delete buttons
+document.addEventListener('click', function(event) {
+    if (event.target.classList.contains('delete-button')) {
+        const userKey = event.target.dataset.key;
+        deleteUser(userKey);
+    }
+});
+
 
 document.getElementById('cancelButton').addEventListener('click', closeModal);

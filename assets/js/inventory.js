@@ -1,5 +1,5 @@
 // Import the Firebase functions you need
-import { getDatabase, ref, get, push, child, orderByChild, equalTo } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+import { getDatabase, ref, get, push, child, orderByChild, equalTo, remove } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
@@ -9,9 +9,6 @@ const database = getDatabase();
 
 // Reference to the "User" node in your database
 const medicationRef = ref(database, 'Medication');
-
-//const logoutButton = document.getElementById('logoutButton');
-
 
 // Function to open the modal
 function openModal() {
@@ -42,12 +39,59 @@ function populateMedicationData(snapshot) {
             <td>${med.quantity}</td>
             <td>${med.type}</td>
             <td>${date}</td>
-            
+            <td><button class="edit-button" data-key="${medSnapshot.key}">Edit</button></td>
+            <td><button class="delete-button" data-key="${medSnapshot.key}"  style="background-color: red; color: white;">Delete</button></td>
+    
         `;
         tbody.appendChild(newRow);
     });
 }
 
+// Function to delete a medication
+function deleteMedication(medKey) {
+    if (confirm("Are you sure you want to delete this medication?")) {
+        // Remove the medication from the database
+        remove(ref(database, `Medication/${medKey}`)).then(() => {
+            // Medication deleted successfully
+            alert("Medication deleted successfully");
+        }).catch((error) => {
+            // Error occurred while deleting medication
+            console.error("Error deleting medication:", error);
+            alert("Error deleting medication. Please try again later.");
+        });
+    }
+}
+
+// Function to populate the form fields with existing medication data for editing
+function editMedication(medKey) {
+    // Get a reference to the medication node in the database
+    const medRef = ref(database, `Medication/${medKey}`);
+
+    // Fetch the medication data from the database
+    get(medRef).then((snapshot) => {
+        // Get the medication data
+        const medication = snapshot.val();
+
+        // Populate the form fields with existing medication data for editing
+        document.getElementById('medName').value = medication.name;
+        document.getElementById('medDescription').value = medication.details;
+        document.getElementById('medQuantity').value = medication.quantity;
+        document.getElementById('medType').value = medication.type;
+        document.getElementById('medDay').value = medication.day;
+        document.getElementById('medMonth').value = medication.month;
+        document.getElementById('medYear').value = medication.year;
+
+        // Store the medication key in a hidden input field
+        document.getElementById('medKey').value = medKey;
+
+        // Open the modal for editing
+        openModal();
+    }).catch((error) => {
+        // Error occurred while fetching medication data
+        console.error("Error fetching medication data:", error);
+        alert("Error fetching medication data. Please try again later.");
+    });
+}
 
 
 // // Retrieve data once and populate the table
@@ -77,18 +121,26 @@ document.addEventListener('DOMContentLoaded', function () {
             // Validate and handle the form submission here
             addNewMedication();
     });
-    // logoutButton.addEventListener('click', () => {
-    //     // Sign out the user
-    //     auth.signOut().then(() => {
-    //         // Redirect the user to the login page
-    //         window.location.href = 'login.html';
-    //     }).catch((error) => {
-    //         // Handle any errors that occur during sign out
-    //         console.error('Error signing out:', error);
-    //     });
-    //   });
 });
 });
+
+// Dynamically attach click event listeners to edit buttons
+document.addEventListener('click', function(event) {
+    if (event.target.classList.contains('edit-button')) {
+        const medKey = event.target.dataset.key;
+        editMedication(medKey);
+    }
+});
+
+// Dynamically attach click event listeners to delete buttons
+document.addEventListener('click', function(event) {
+    if (event.target.classList.contains('delete-button')) {
+        const medKey = event.target.dataset.key;
+        deleteMedication(medKey);
+    }
+});
+
+
 
 document.getElementById('cancelButton').addEventListener('click', closeModal);
 

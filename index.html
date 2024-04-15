@@ -8,6 +8,8 @@
     <title>EzPharma</title>
     <!-- ======= Styles ====== -->
     <link rel="stylesheet" href="assets/css/style.css">
+    
+    <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -33,6 +35,14 @@
                     </a>
                 </li>
 
+                <li>
+                    <a href="staff.html">
+                        <span class="icon">
+                            <ion-icon name="people-outline"></ion-icon>
+                        </span>
+                        <span class="title">Staff</span>
+                    </a>
+                </li>
                 
                 <li>
                     <a href="inventory.html">
@@ -43,14 +53,7 @@
                     </a>
                 </li>
 
-                <li>
-                    <a href="staff.html">
-                        <span class="icon">
-                            <ion-icon name="people-outline"></ion-icon>
-                        </span>
-                        <span class="title">Staff</span>
-                    </a>
-                </li>
+                
 
                 <li>
                     <a href="issue.html">
@@ -66,7 +69,7 @@
                         <span class="icon">
                             <ion-icon name="newspaper-outline"></ion-icon>
                         </span>
-                        <span class="title">Record</span>
+                        <span class="title">Reporting and Analytics</span>
                     </a>
                 </li>
 
@@ -120,6 +123,9 @@
             </div>
 
             <!-- ======================= Cards ================== -->
+            <div class="cardHeader">
+                <h2 style="padding: 30px;">Welcome to EzPharma</h2> 
+
             <div class="cardBox">
                 <div class="card">
                     <div>
@@ -164,15 +170,174 @@
                         <ion-icon name="chatbubbles-outline"></ion-icon>
                     </div>
                 </div>
-                
             </div>
+            </div>
+            <div class="cardHeader">
+                <h2 style="padding: 30px;">Dashboard</h2>
             
+
+            <div class="cardBox">
+                <a href="staff.html" class="card" style="background-color:#2a2185 ; height: 220px">
+                    <div>
+                        <div class="cardName" style="color: white; font-size: 20px;">Staff</div>
+                    </div>
+                    <div class="iconBx" style="font-size: 100px; ">
+                        <ion-icon name="people-outline"></ion-icon>
+                    </div>
+                </a>
+
+                <a href="inventory.html" class="card" style="background-color:#6676B9 ; height: 220px">
+                    <div>
+                        <div class="cardName" style="color: white; font-size: 20px;">Inventory</div>
+                    </div>
+                    <div class="iconBx" style="font-size: 100px; ">
+                        <ion-icon name="medkit-outline"></ion-icon>
+                    </div>
+                </a>
+
+                <a href="issue.html" class="card" style="background-color: #98C4D8 ; height: 220px">
+                    <div>
+                        <div class="cardName" style="color: white; ">Issues</div>
+                    </div>
+                    <div class="iconBx" style="font-size: 100px; ">
+                        <ion-icon name="chatbubbles-outline"></ion-icon>
+                    </div>
+                </a>
+                
+                <a href="record.html" class="card" style="background-color: #84E3F9; height: 220px">
+                    <div>
+                        <div class="cardName" style="color: white; font-size: 20px;">Reporting and Analytics</div>
+                    </div>
+                    <div class="iconBx" style="font-size: 100px; ">
+                        <ion-icon name="newspaper-outline"></ion-icon>
+                    </div>
+                </a>
+                </div>
+            </div>
+
+            <div class="cardHeader" >
+                <h2 style="padding: 30px;">Modules Insight</h2>
+
+            <div class="chart card">
+                <div id="container"></div>
+            </div>
+                
+            <div class="card-container" style="padding: 30px;">
+                <div class="chart card">
+                    <div id="containerpie"></div> 
+                </div>
+                <div class="chart card">
+                    <div id="containerissue"></div>
+                </div>
+            </div>
         </div>
-    </div>
-    <!-- <div style="width: 500px;"><canvas id="dimensions"></canvas></div><br/> -->
-    <canvas id="myChart" width="400" height="400"></canvas>
+            
+         </div>
+        </div>
+
+    </div>   
+
+    <script>
+ 
+                    var chart = new ej.charts.Chart({
+                        title: 'Record of Medication used',
+                        //Initializing Primary X Axis
+                        primaryXAxis: {
+                            valueType: 'Category',
+                            title: 'Medication Name',
+                        },
+                        //Initializing Primary Y Axis
+                         primaryYAxis: {
+                            title: 'Number of medicine used'
+                        },
+             
+                        //Initializing Chart Series
+                        series: [
+                            {
+                                type: 'Column',
+                                dataSource: [
+                                    { country: "Aspirin", medal: 5 },
+                                    { country: "Paracetamol", medal: 4 },
+                                    { country: "medtrial", medal: 7 },
+                                ],
+                                xName: 'country',
+                                yName: 'medal',
+                                marker: {
+                                visible: true,
+                                dataLabel: { visible: true }
+                                }
+                            }
+                        ],
+                    });
+                    chart.appendTo('#container');
+                    
+    </script>
+
+<script>
+ 
+    var pie = new ej.charts.AccumulationChart({
+        //Initializing Series
+        title: "Medication Type",
+        legendSettings: {
+            visible: true,
+        },
+        series: [
+            {
+                dataSource: [
+                    { 'x': 'TABLET', y: 37 }, { 'x': 'INJECTION', y: 17 },
+                    { 'x': 'CAPSULE', y: 19 },
+                    { 'x': 'Others', y: 4 }, { 'x': 'Opera', y: 11 },
+                    { 'x': 'Android', y: 12 }
+                ],
+                dataLabel: {
+                    visible: true,
+                    position: 'Inside',
+                },
+                xName: 'x',
+                yName: 'y'
+            }
+        ],
+        tooltip: { enable: true, header: 'Medication name', format: '${point.x}:<b> ${point.y}%<b>' },
+    });
+    pie.appendTo('#containerpie');
+</script>
 
 
+<script>
+ 
+    var chart = new ej.charts.Chart({
+        title: 'Issues recorded',
+        //Initializing Primary X Axis
+        primaryXAxis: {
+            valueType: 'Category',
+            title: 'Issue category',
+        },
+        //Initializing Primary Y Axis
+         primaryYAxis: {
+            title: 'Number of issue'
+        },
+
+        //Initializing Chart Series
+        series: [
+            {
+                type: 'Column',
+                dataSource: [
+                    { country: "SOLVED", medal: 1 },
+                    { country: "UNSOLVED", medal: 4 },
+                ],
+                xName: 'country',
+                yName: 'medal',
+                marker: {
+                visible: true,
+                dataLabel: { visible: true }
+                }
+            }
+        ],
+    });
+    chart.appendTo('#containerissue');
+    
+</script>
+                
     <script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js"></script>
     <script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js"></script>
     <script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics.js"></script> 
@@ -187,11 +352,8 @@
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
-    <!-- Include Chart.js library -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <script type="module">
-        import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+    <!-- <script type="module">
+        import { getDatabase, ref, get, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
     
         // Initialize Firebase
@@ -208,46 +370,11 @@
 
         const app = initializeApp(firebaseConfig);
         const database = getDatabase(app);
-    
-        // Fetch data from Firebase and render the chart
-        function renderChart() {
-            const recordRef = ref(database, 'Record/');
-            get(recordRef).then((snapshot) => {
-                const data = snapshot.val();
-                const medNames = Object.keys(data);
-                const quantities = Object.values(data).map(record => record.quantityR);
-    
-                // Create a new Chart instance
-                const ctx = document.getElementById('myChart').getContext('2d');
-                new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: medNames,
-                        datasets: [{
-                            label: 'Quantity',
-                            data: quantities,
-                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                    }
-                });
-            }).catch((error) => {
-                console.error("Error getting data:", error);
-            });
-        }
-    
-        // Call the function to render the chart
-        renderChart();
+
+        // Get a reference to the database node
+        const recordRef = ref(database, 'Record');
     </script>
-    
+     -->
 </body>
 
 </html>

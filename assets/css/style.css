@@ -290,18 +290,39 @@ button:hover {
   color: var(--white);
 }
 
+.card-container {
+  display: flex;
+}
+
+.chart.card {
+  flex: 1;
+  padding: 20px;
+  margin-right: 20px; /* Adjust spacing between cards */
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.1);
+  background: var(--white);
+  border-radius: 20px;
+  /* width:auto; */
+}
+
+.chart.card > div {
+  width: 100%; /* Ensure the chart container fills the card */
+  height: 100%; /* Ensure the chart container fills the card */
+}
+
 /* ================== Order Details List ============== width used to be 100%*/
 .details {
   position: relative;
   width: 100%; 
   padding: 20px;
-  display: grid;
+  display: flex;
+  margin-bottom: 20px; /* Add margin-bottom for empty space */
   /* grid-template-columns: 2fr 1fr; */
-  grid-gap: 30px;
+  /* grid-gap: 30px; */
   /* margin-top: 10px; */
 }
 
 .details .recentOrders {
+  flex:1;
   position: relative;
   display: grid;
   min-height: 500px;
