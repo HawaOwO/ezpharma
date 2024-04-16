@@ -309,6 +309,72 @@ button:hover {
   height: 100%; /* Ensure the chart container fills the card */
 }
 
+/*card1 3 in 1*/
+.cardBox3 {
+  position: relative;
+  width: 100%;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 30px;
+}
+
+.cardBox3 .card {
+  position: relative;
+  background: var(--white);
+  padding: 30px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+}
+
+.cardBox3 .card .numbers {
+  position: relative;
+  font-weight: 500;
+  font-size: 2.5rem;
+  color: var(--blue);
+}
+
+.cardBox3 .card .cardName {
+  color: var(--black2);
+  font-size: 1.1rem;
+  margin-top: 5px;
+}
+
+.cardBox3 .card .iconBx {
+  font-size: 3.5rem;
+  color: var(--black2);
+}
+
+.cardBox3 .card:hover {
+  background: var(--blue);
+}
+.cardBox3 .card:hover .numbers,
+.cardBox3 .card:hover .cardName,
+.cardBox3 .card:hover .iconBx {
+  color: var(--white);
+}
+
+.card-container {
+  display: flex;
+}
+
+.chart.card {
+  flex: 1;
+  padding: 20px;
+  margin-right: 20px; /* Adjust spacing between cards */
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.1);
+  background: var(--white);
+  border-radius: 20px;
+  /* width:auto; */
+}
+
+.chart.card > div {
+  width: 100%; /* Ensure the chart container fills the card */
+  height: 100%; /* Ensure the chart container fills the card */
+}
 /* ================== Order Details List ============== width used to be 100%*/
 .details {
   position: relative;
