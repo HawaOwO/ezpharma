@@ -35,31 +35,61 @@ function populateRecordData(snapshot) {
 }
 
 // Function to populate the third card with medication names
+// function populateLowStockMedications() {
+//     // Get the div where the medication names will be displayed
+//     const outOfStockDiv = document.querySelector('.out.of.stock');
+
+//     // Clear existing content
+//     outOfStockDiv.innerHTML = '';
+
+//     // Fetch data from the database and update the cards accordingly
+//     get(medicationRef).then((snapshot) => {
+//         // Loop through each medication to count low stock items
+//         snapshot.forEach((medSnapshot) => {
+//             const medication = medSnapshot.val();
+//             if (medication.quantity < 20) {
+//                 // Create a div element for each medication name
+//                 const medicationNameDiv = document.createElement('div');
+//                 medicationNameDiv.textContent = medication.name;
+//                 // Append the medication name div to the outOfStockDiv
+//                 outOfStockDiv.appendChild(medicationNameDiv);
+//             }
+//         });
+//     }).catch((error) => {
+//         console.error("Error getting medication data:", error);
+//     });
+// }
+
+// Function to populate the third card with medication names
 function populateLowStockMedications() {
-    // Get the div where the medication names will be displayed
-    const outOfStockDiv = document.querySelector('.out.of.stock');
+    // Get the tbody element of the table for low stock medications
+    const tbody = document.querySelector('.lowStockMedications');
 
-    // Clear existing content
-    outOfStockDiv.innerHTML = '';
+    // Clear existing table rows
+    tbody.innerHTML = '';
 
-    // Fetch data from the database and update the cards accordingly
+    // Fetch data from the database and update the table accordingly
     get(medicationRef).then((snapshot) => {
-        // Loop through each medication to count low stock items
+        // Loop through each medication to check for low stock items
         snapshot.forEach((medSnapshot) => {
             const medication = medSnapshot.val();
             if (medication.quantity < 20) {
-                // Create a div element for each medication name
-                const medicationNameDiv = document.createElement('div');
-                medicationNameDiv.textContent = medication.name;
-                // Append the medication name div to the outOfStockDiv
-                outOfStockDiv.appendChild(medicationNameDiv);
+                // Create a new table row for each medication
+                const newRow = document.createElement('tr');
+                // Populate the table row with medication data
+                newRow.innerHTML = `
+                    <td>${medication.name}</td>
+                    <td>${medication.quantity}</td>
+                    <td>${medication.type}</td>
+                `;
+                // Append the new row to the table body
+                tbody.appendChild(newRow);
             }
         });
     }).catch((error) => {
         console.error("Error getting medication data:", error);
     });
 }
-
 
 // Call the function to populate the third card when the page loads
 document.addEventListener('DOMContentLoaded', populateLowStockMedications);
@@ -72,6 +102,7 @@ function updateCardNumbers() {
     get(recordRef).then((snapshot) => {
         let dailyUseCount = 0;
         let medTodayQuantity = 0;
+        
 
         // Loop through each record
         snapshot.forEach((childSnapshot) => {
@@ -81,14 +112,30 @@ function updateCardNumbers() {
                 dailyUseCount++; // Increment daily use count if the date matches today
                 medTodayQuantity += record.quantityR; // Add quantityR to medTodayQuantity for records with today's date
             }
+            
         });
 
         // Update the number of daily uses
         document.querySelector('.numbers.record-today').innerText = dailyUseCount;
         // Update the number of medications used today
         document.querySelector('.numbers.med-today').innerText = medTodayQuantity;
+        
     }).catch((error) => {
         console.error("Error updating card numbers:", error);
+    });
+
+    get(medicationRef).then((snapshot) => {
+        let medOutOfStock=0;
+        // Loop through each medication to count low stock items
+        snapshot.forEach((medSnapshot) => {
+            const medication = medSnapshot.val();
+            if (medication.quantity < 20) {
+                medOutOfStock++;
+            }
+        });
+        document.querySelector('.numbers.out-of-stock').innerText = medOutOfStock;
+    }).catch((error) => {
+        console.error("Error getting medication data:", error);
     });
 }
 
@@ -123,21 +170,44 @@ document.addEventListener('DOMContentLoaded', updateCardNumbers);
 
 
 // Get a reference to the download button
-const downloadReportBtn = document.getElementById('downloadReportBtn');
+// const downloadReportBtn = document.getElementById('downloadReportBtn');
 
-// Add event listener to the button
-downloadReportBtn.addEventListener('click', () => {
-    // Initialize jsPDF
-    const doc = new jsPDF();
+// // Add event listener to the button
+// downloadReportBtn.addEventListener('click', () => {
+//     // Initialize jsPDF
+//     const doc = new jsPDF();
 
-    // Add the table content to the PDF
-    doc.autoTable({ html: 'table' });
+//     // Add the table content to the PDF
+//     doc.autoTable({ html: 'table' });
 
-    // Save the PDF
-    doc.save('report.pdf');
+//     // Save the PDF
+//     doc.save('report.pdf');
+// });
+document.addEventListener('DOMContentLoaded', function () {
+    const downloadButton = document.getElementById('downloadReportBtn');
+    
+    downloadButton.addEventListener('click', function () {
+        // const element = document.body; // Choose the element you want to save as PDF, in this case, the entire body
+        
+        // html2pdf()
+        //     .from(element)
+        //     .save();
+        window.print();
+      /* This code snippet is setting up functionality to generate a PDF report from the content of the
+      entire HTML body. Here's a breakdown of what it does: */
+        // const element = document.body; // Choose the element you want to save as PDF, in this case, the entire body
+        
+        // const currentDate = new Date();
+        // const fileName = `Report_${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}_${currentDate.getHours().toString().padStart(2, '0')}-${currentDate.getMinutes().toString().padStart(2, '0')}-${currentDate.getSeconds().toString().padStart(2, '0')}.pdf`;
+
+        // html2pdf()
+        //     .from(element)
+        //     .set({
+        //         filename: fileName
+        //     })
+        //     .save();
+    });
 });
-
-
 
 
 // Retrieve data once and populate the table
@@ -147,3 +217,74 @@ get(recordRef).then((snapshot) => {
     console.error("Error getting data:", error);
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+    // Initialize flatpickr for start date input
+    flatpickr("#startDate", {
+        dateFormat: "Y-m-d", // Format the date as yyyy-mm-dd
+    });
+
+    // Initialize flatpickr for end date input
+    flatpickr("#endDate", {
+        dateFormat: "Y-m-d", // Format the date as yyyy-mm-dd
+    });
+
+    const outputResult = document.getElementById('outputResultMostUsed');
+
+    // Function to handle logic and display output
+    function handleDateSelection() {
+        const startDate = document.getElementById('startDate').value;
+        const endDate = document.getElementById('endDate').value;
+
+        // Example logic: Display selected dates
+        outputResult.textContent = `Start Date: ${startDate}, End Date: ${endDate}`;
+
+        // Retrieve data from Firebase between selected dates
+        get(recordRef).then((snapshot) => {
+            // Initialize an object to store medicine quantities
+            const medicineQuantities = {};
+
+            // Loop through each record
+            snapshot.forEach((childSnapshot) => {
+                const record = childSnapshot.val();
+                // Parse the record date to get the date
+                const recordDate = new Date(record.date);
+                const recordDateStr = recordDate.toISOString().split('T')[0]; // Get the date in yyyy-mm-dd format
+
+                // Check if the record date is within the selected range
+                if (recordDateStr >= startDate && recordDateStr <= endDate) {
+                    // Increment the quantity for the corresponding medicine
+                    if (record.name in medicineQuantities) {
+                        medicineQuantities[record.name] += record.quantityR;
+                    } else {
+                        medicineQuantities[record.name] = record.quantityR;
+                    }
+                }
+            });
+
+            // Find the medicine with the highest quantity
+            let mostPopularMedicine = '';
+            let maxQuantity = 0;
+            for (const medicine in medicineQuantities) {
+                if (medicineQuantities[medicine] > maxQuantity) {
+                    mostPopularMedicine = medicine;
+                    maxQuantity = medicineQuantities[medicine];
+                }
+            }
+
+            // Display the most popular medicine
+            if (mostPopularMedicine !== '') {
+                outputResult.textContent += `, Most Popular Medicine: ${mostPopularMedicine}`;
+            } else {
+                outputResult.textContent += `, No records found between selected dates`;
+            }
+        }).catch((error) => {
+            console.error("Error getting data:", error);
+        });
+    }
+
+    // Event listener for start date input
+    document.getElementById('startDate').addEventListener('change', handleDateSelection);
+
+    // Event listener for end date input
+    document.getElementById('endDate').addEventListener('change', handleDateSelection);
+});
