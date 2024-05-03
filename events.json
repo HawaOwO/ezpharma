@@ -1,0 +1,60 @@
+[
+    {
+      "name": "Flu season",
+      "month": "2024-01-01",
+      "description": "Description of Event 1"
+    },
+    {
+        "name": "Influenza",
+        "month": "2024-01-01",
+        "description": "Description of Event 1"
+    },
+    {
+        "name": "Chikungunya",
+        "month": "2024-01-01",
+        "description": "Description of Event 1"
+    },
+    {
+        "name": "Dengue fever",
+        "month": "2024-01-01",
+        "description": "Description of Event 1"
+    },
+    {
+        "name": "Meningococcal disease",
+        "month": "2024-01-01",
+        "description": "Description of Event 1"
+    },
+
+    {
+        "name": "Flu season",
+        "month": "2024-02-01",
+        "description": "Description of Event 1"
+    },
+    {
+        "name": "Influenza",
+        "month": "2024-02-01",
+        "description": "Description of Event 1"
+    },
+    {
+        "name": "Chikungunya",
+        "month": "2024-02-01",
+        "description": "Description of Event 1"
+    },
+    {
+        "name": "Cutaneous leishmaniasis",
+        "month": "2024-02-01",
+        "description": "Description of Event 1"
+    },
+    {
+        "name": "Lassa fever",
+        "month": "2024-02-01",
+        "description": "Description of Event 1"
+    },
+    {
+        "name": "legionellosis",
+        "month": "2024-02-01",
+        "description": "Description of Event 1"
+    }
+    
+  ]
+  

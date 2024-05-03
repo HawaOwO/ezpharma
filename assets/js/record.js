@@ -236,7 +236,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const endDate = document.getElementById('endDate').value;
 
         // Example logic: Display selected dates
-        outputResult.textContent = `Start Date: ${startDate}, End Date: ${endDate}`;
+         outputResult.textContent = `Start Date: ${startDate}, End Date: ${endDate}`;
 
         // Retrieve data from Firebase between selected dates
         get(recordRef).then((snapshot) => {
@@ -273,9 +273,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Display the most popular medicine
             if (mostPopularMedicine !== '') {
-                outputResult.textContent += `, Most Popular Medicine: ${mostPopularMedicine}`;
+                outputResult.innerHTML += `<br>Most Popular Medicine: ${mostPopularMedicine}`;
             } else {
-                outputResult.textContent += `, No records found between selected dates`;
+                outputResult.innerHTML += `<br>No records found between selected dates`;
             }
         }).catch((error) => {
             console.error("Error getting data:", error);
@@ -287,4 +287,73 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Event listener for end date input
     document.getElementById('endDate').addEventListener('change', handleDateSelection);
+
+});
+document.addEventListener('DOMContentLoaded', function () {
+    // Initialize flatpickr for start date input
+    flatpickr("#forecastStartDate", {
+        dateFormat: "Y-m-d", // Format the date as yyyy-mm-dd
+    });
+
+    // Initialize flatpickr for end date input
+    flatpickr("#forecastEndDate", {
+        dateFormat: "Y-m-d", // Format the date as yyyy-mm-dd
+    });
+
+    const outputForecast = document.getElementById('outputResultForecast');
+    // Function to handle logic and display forecast output
+    function handleForecast() {
+        const startDate = document.getElementById('forecastStartDate').value;
+        const endDate = document.getElementById('forecastEndDate').value;
+        const startMonth = new Date(startDate).getMonth() + 1; // +1 because getMonth() returns zero-based month in
+        const endMonth = new Date(endDate).getMonth() + 1; 
+        outputForecast.innerHTML = ''; // Clear existing content
+    
+        // Define the list of illnesses for each month
+        const illnessesByMonth = {
+            1: ['flu season', 'influenza', 'Avian influenza', 'Chikungunya', 'Dengue fever', 'meningococcal disease'],
+            2: ['flu season', 'influenza', 'Chikungunya', 'Cutaneous leishmaniasis', 'lassa fever', 'legionellosis'],
+            3: ['varicella', 'Chagas disease', 'Chickenpox', 'lassa fever', 'legionellosis', 'meningococcal disease', 'measles'],
+            4: ['varicella', 'Chagas disease', 'Chickenpox', 'lassa fever', 'leptospirosis', 'meningococcal disease'],
+            5: ['gonorrhea', 'influenza', 'Chagas disease', 'Chickenpox', 'lassa fever', 'leptospirosis', 'measles'],
+            6: ['gonorrhea', 'influenza', 'Chagas disease', 'Chikungunya', 'lassa fever', 'leptospirosis', 'lyme disease', 'lymphatic filariasis', 'hepatitis c'],
+            7: ['gonorrhea', 'RSV', 'influenza', 'Chagas disease', 'legionellosis', 'lyme disease', 'lymphatic filariasis', 'hepatitis c', 'measles'],
+            8: ['polio', 'Chagas disease', 'legionellosis', 'lyme disease', 'pertussis'],
+            9: ['polio'],
+            10: ['flu vaccination', 'RSV', 'Japanese encephalitis (JE)', 'Cryptosporidium', 'Cutaneous leishmaniasis', 'meningococcal disease', 'measles'],
+            11: ['flu vaccination', 'RSV', 'influenza', 'Japanese encephalitis (JE)', 'Chikungunya', 'Cryptosporidium', 'Cutaneous leishmaniasis', 'Dengue fever', 'lymphatic filariasis'],
+            12: ['flu', 'RSV', 'influenza', 'Japanese encephalitis (JE)', 'Avian influenza', 'Chikungunya', 'Cutaneous leishmaniasis', 'Dengue fever', 'lymphatic filariasis', 'measles']
+        };
+    
+        // Set to keep track of displayed illnesses
+        const displayedIllnesses = new Set();
+         // Check if there are any months between startMonth and endMonth
+       // Check if there are any months between startMonth and endMonth
+       for (let month = startMonth; month <= endMonth; month++) {
+        if (illnessesByMonth[month]) {
+            illnessesByMonth[month].forEach(illness => {
+                // Check if the illness has not been displayed yet
+                if (!displayedIllnesses.has(illness)) {
+                    const illnessElement = document.createElement('div');
+                    illnessElement.innerHTML = `<h3>${illness}</h3>`;
+                    outputForecast.appendChild(illnessElement);
+                    // Add the illness to the set of displayed illnesses
+                    displayedIllnesses.add(illness);
+                }
+            });
+        }
+    }
+        // If no illnesses found, display a message
+        if (outputForecast.innerHTML === '') {
+            outputForecast.textContent = 'No illnesses found for the selected period.';
+        }
+    }
+        
+    // Event listener for start date input
+    document.getElementById('forecastStartDate').addEventListener('change', handleForecast);
+    
+    // Event listener for end date input
+    document.getElementById('forecastEndDate').addEventListener('change', handleForecast);
+    
+
 });

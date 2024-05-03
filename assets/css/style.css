@@ -357,6 +357,54 @@ button:hover {
   color: var(--white);
 }
 
+/*card1 2 in 1*/
+.cardBox2 {
+  position: relative;
+  width: 100%;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 30px;
+}
+
+.cardBox2 .card {
+  position: relative;
+  background: var(--white);
+  padding: 30px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+}
+
+.cardBox2 .card .numbers {
+  position: relative;
+  font-weight: 500;
+  font-size: 2.5rem;
+  color: var(--blue);
+}
+
+.cardBox2 .card .cardName {
+  color: var(--black2);
+  font-size: 1.1rem;
+  margin-top: 5px;
+}
+
+.cardBox2 .card .iconBx {
+  font-size: 3.5rem;
+  color: var(--black2);
+}
+
+.cardBox2 .card:hover {
+  background: var(--blue);
+}
+.cardBox2 .card:hover .numbers,
+.cardBox2 .card:hover .cardName,
+.cardBox2 .card:hover .iconBx {
+  color: var(--white);
+}
+
 .card-container {
   display: flex;
 }
