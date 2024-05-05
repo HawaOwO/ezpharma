@@ -91,43 +91,6 @@
                         <button id="downloadReportBtn">Download Report</button>
                 </div>
             </div>
-
-                    <!-- <div class="cardBox3">
-                        <div class="card-container" style="padding: 30px;">
-                        <div class="card" style="width: 300px; height: min-content;">
-                            <div>
-                                <div class="total med today"></div>
-                                <div class="cardName">Total medications scanned/used today</div>
-                            </div>
-
-                            <div class="iconBx">
-                                <ion-icon name="receipt-outline"></ion-icon>
-                            </div>
-                        </div>
-
-                        <div class="card" style="width: 300px; height: min-content;">
-                            <div>
-                                <div class="total record today"></div>
-                                <div class="cardName">Daily record today</div>
-                            </div>
-
-                            <div class="iconBx">
-                                <ion-icon name="receipt-outline"></ion-icon>
-                            </div>
-                        </div>
-
-                        <div class="card" style="width: 400px">
-                            <div>
-                                <div class="cardName">Medication running out</div>
-                                <div class="total record today"></div>
-                            </div>
-
-                            <div class="iconBx">
-                                <ion-icon name="receipt-outline"></ion-icon>
-                            </div>
-                        </div>
-                    </div>
-                    </div> -->
                     <div class="cardHeader">
                         <h2 style="padding: 30px;">Report Insight</h2>
                     </div>
@@ -171,30 +134,42 @@
                     </div>
                     <div class="card-container" style="padding: 30px;">
                         <div class="chart card">
-                            <div class="cardBox2"> 
-                                <div class="card" >
-                                    <div>
-                                        <label for="startDate">Start Date:</label>
+                            <div class="card">
+                            <div class="cardName" style="padding: 10px;">Most used medication during these period: </div>
+                                <div class="date-range-picker">
+                                    <div class="date-picker">
+                                        <!-- <label for="startDate">Start Date:</label> -->
                                         <input type="text" id="startDate" placeholder="Select Start Date">
-                                        <br><label for="endDate">End Date:</label>
+                                    </div>
+                                    <div class="arrow1">&#187;</div>
+                                    <div class="date-picker">
+                                        <!-- <label for="endDate">End Date:</label> -->
                                         <input type="text" id="endDate" placeholder="Select End Date">
-                                    <div id="outputResultMostUsed"></div>
+                                    </div>
                                 </div>
-                                    
-                                </div>
-                                <div class="card">
-                                    <div>
-                                        <label for="forecastStartDate">Start Date:</label>
-                                        <input type="text" id="forecastStartDate" placeholder="Select Start Date">
-                                        <br><label for="forecastEndDate">End Date:</label>
-                                        <input type="text" id="forecastEndDate" placeholder="Select End Date">
-                                    <div id="outputResultForecast"></div>
-                                </div>
-                                    
-                                </div>
+                                <div class="output" style="padding: 10px; background-color: #05dd8e;" id="outputResultMostUsed"></div>
                             </div>
                         </div>
+                        <div class="chart card">
+                            <div class="card">
+                                <div class="cardName" style="padding: 10px;">Illness most frequent will happen between these period: </div>
+                                <div class="date-range-picker">
+                                    <div class="date-picker">
+                                        <!-- <label for="forecastStartDate">Start Date:</label> -->
+                                        <input type="text" id="forecastStartDate" placeholder="Select Start Date">
+                                    </div>
+                                    <div class="arrow1">&#187;</div>
+                                    <div class="date-picker">
+                                        <!-- <label for="forecastEndDate">End Date:</label> -->
+                                        <input type="text" id="forecastEndDate" placeholder="Select End Date">
+                                    </div>
+                                </div>
+                                <div class="output" style="padding: 10px; background-color: #05dd8e;" id="outputResultForecast"></div>
+                            </div>
+                         </div>   
                     </div>
+                        
+                    
 
             <!-- ================ User Details List ================= -->
             <div class="details">

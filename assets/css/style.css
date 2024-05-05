@@ -292,7 +292,75 @@ button:hover {
 
 .card-container {
   display: flex;
+  justify-content: center;
 }
+
+/* Style for date picker container */
+.date-range-picker {
+  display: flex;
+  align-items: center;
+  background-color: #f5f5f5; /* Light gray background */
+  padding: 15px; /* Add padding for spacing */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+/* Style for each date picker */
+.date-picker {
+  margin: 0 10px;
+}
+
+.picker-title {
+  font-weight: bold; /* Make the title bold */
+  margin-bottom: 10px; /* Add some spacing below the title */
+}
+
+
+/* Style for date picker input */
+.date-picker input[type="text"] {
+  border: 2px solid #ccc; /* Gray border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px; /* Add padding for spacing */
+  font-size: 12px; /* Adjust font size */
+  outline: none; /* Remove outline on focus */
+}
+
+/* Style for placeholder text */
+.date-picker input[type="text"]::placeholder {
+  color: #999; /* Light gray color */
+}
+
+/* Style for focus state */
+.date-picker input[type="text"]:focus {
+  border-color: #2bc808; /* Change border color on focus */
+}
+
+.arrow {
+  font-size: 24px;
+  margin: 0 10px;
+}
+
+.arrow1 {
+  font-size: 24px;
+  margin: 0 10px;
+  color: #fff; /* Set the color of the arrow */
+  background-color: #2bc808; /* Set the background color */
+  border-radius: 50%; /* Make the arrow circular */
+  padding: 8px; /* Adjust the padding for better appearance */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; /* Set the width of the arrow */
+  height: 40px; /* Set the height of the arrow */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a shadow for depth */
+  transition: background-color 0.3s ease; /* Add a smooth transition effect */
+}
+
+.arrow1:hover {
+  background-color: #0056b3; /* Change the background color on hover */
+}
+
+
 
 .chart.card {
   flex: 1;

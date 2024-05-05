@@ -1,5 +1,5 @@
 // Import the Firebase functions you need
-import { getDatabase, ref, get, push, remove } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+import { getDatabase, ref, get, push, remove, update } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
@@ -32,19 +32,23 @@ function populateIssueData(snapshot) {
         const newRow = document.createElement('tr');
         // Combine day, month, and year in one line
         const date = `${issue.day} ${issue.month} ${issue.year}`;
+        if (issue.status === 'UNSOLVED') {
+            newRow.style.backgroundColor = '#fffcf2'; // Yellow background for Admin
+        } 
+        
         newRow.innerHTML = `
             <td>${issue.name}</td>
             <td>${issue.description}</td>
             <td>${issue.username}</td>
             <td>${issue.status}</td>
             <td>${date}</td>
-            <td><button class="edit-button" data-key="${issueSnapshot.key}">Edit</button></td>
             <td><button class="delete-button" data-key="${issueSnapshot.key}"  style="background-color: red; color: white;">Delete</button></td>
             
         `;
         tbody.appendChild(newRow);
     });
 }
+            // <td><button class="edit-button" data-key="${issueSnapshot.key}">Edit</button></td>
 
 function deleteIssue(issueKey) {
     if (confirm("Are you sure you want to delete this issue?")) {

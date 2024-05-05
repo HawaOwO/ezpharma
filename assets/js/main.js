@@ -1,3 +1,4 @@
+import firebase from "firebase/compat/app";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 import { getDatabase, ref, get, push, child, orderByChild, equalTo } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
@@ -98,7 +99,3 @@ get(issueRef).then((snapshot) => {
   // Fetch data from the database and update the cards accordingly
 
 }
-
-// Call the function to update card numbers when the page loads
-document.addEventListener('DOMContentLoaded', updateCardNumbers);
-

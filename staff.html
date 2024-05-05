@@ -205,45 +205,6 @@
        const database = getDatabase(app);
        const auth = getAuth(app); // Initialize the auth variable
   
-    //   saveData.addEventListener('click',(e) => {
-
-    //     var newFirstName = document.getElementById('newFirstName').value;
-    //     var newLastName = document.getElementById('newLastName').value;
-    //     var newEmail = document.getElementById('newEmail').value;
-    //     var newPassword = document.getElementById('newPassword').value;
-    //     var newPhone = document.getElementById('newPhone').value;
-    //     var newRole = document.getElementById('newRole').value;
-
-    //     // Generate username using first name and last name
-    //     var newUsername = newFirstName + newLastName;
-
-    //   set(ref(database, 'User/' + newFirstName + newLastName ), {
-  
-    //     firstName: newFirstName,
-    //     lastName: newLastName,
-    //     username: newUsername,
-    //     email: newEmail,
-    //     phone: newPhone,
-    //     role: newRole,
-    //     profilePicture: ""
-  
-    //    }).then(() => {
-    //         // After saving user data to the database, create user in Firebase Authentication
-    //         createUserWithEmailAndPassword(auth, newEmail, newPassword)
-    //             .then((userCredential) => {
-    //                 closeModal();
-    //                 alert('User added successfully!');
-    //             })
-    //             .catch((error) => {
-    //                 console.error('Error adding user:', error.message);
-    //                 alert('Error adding user. Please check your input and try again.');
-    //             });
-    //     }).catch((error) => {
-    //         console.error('Error saving user data:', error.message);
-    //         alert('Error saving user data. Please try again.');
-    //     });
-    //   });
-
     saveData.addEventListener('click',(e) => {
     var newFirstName = document.getElementById('newFirstName').value;
     var newLastName = document.getElementById('newLastName').value;

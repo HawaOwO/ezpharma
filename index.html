@@ -221,7 +221,7 @@
             <div class="chart card">
                 <div id="container"></div>
             </div>
-                
+                         
             <div class="card-container" style="padding: 30px;">
                 <div class="chart card">
                     <div id="containerpie"></div> 
@@ -237,107 +237,6 @@
 
     </div>   
 
-    <script>
- 
-                    var chart = new ej.charts.Chart({
-                        title: 'Record of Medication used',
-                        //Initializing Primary X Axis
-                        primaryXAxis: {
-                            valueType: 'Category',
-                            title: 'Medication Name',
-                        },
-                        //Initializing Primary Y Axis
-                         primaryYAxis: {
-                            title: 'Number of medicine used'
-                        },
-             
-                        //Initializing Chart Series
-                        series: [
-                            {
-                                type: 'Column',
-                                dataSource: [
-                                    { country: "Aspirin", medal: 5 },
-                                    { country: "Paracetamol", medal: 4 },
-                                    { country: "medtrial", medal: 7 },
-                                ],
-                                xName: 'country',
-                                yName: 'medal',
-                                marker: {
-                                visible: true,
-                                dataLabel: { visible: true }
-                                }
-                            }
-                        ],
-                    });
-                    chart.appendTo('#container');
-                    
-    </script>
-
-<script>
- 
-    var pie = new ej.charts.AccumulationChart({
-        //Initializing Series
-        title: "Medication Type",
-        legendSettings: {
-            visible: true,
-        },
-        series: [
-            {
-                dataSource: [
-                    { 'x': 'TABLET', y: 37 }, { 'x': 'INJECTION', y: 17 },
-                    { 'x': 'CAPSULE', y: 19 },
-                    { 'x': 'Others', y: 4 }, { 'x': 'Opera', y: 11 },
-                    { 'x': 'Android', y: 12 }
-                ],
-                dataLabel: {
-                    visible: true,
-                    position: 'Inside',
-                },
-                xName: 'x',
-                yName: 'y'
-            }
-        ],
-        tooltip: { enable: true, header: 'Medication name', format: '${point.x}:<b> ${point.y}%<b>' },
-    });
-    pie.appendTo('#containerpie');
-</script>
-
-
-<script>
- 
-    var chart = new ej.charts.Chart({
-        title: 'Issues recorded',
-        //Initializing Primary X Axis
-        primaryXAxis: {
-            valueType: 'Category',
-            title: 'Issue category',
-        },
-        //Initializing Primary Y Axis
-         primaryYAxis: {
-            title: 'Number of issue'
-        },
-
-        //Initializing Chart Series
-        series: [
-            {
-                type: 'Column',
-                dataSource: [
-                    { country: "SOLVED", medal: 1 },
-                    { country: "UNSOLVED", medal: 4 },
-                ],
-                xName: 'country',
-                yName: 'medal',
-                marker: {
-                visible: true,
-                dataLabel: { visible: true }
-                }
-            }
-        ],
-    });
-    chart.appendTo('#containerissue');
-    
-</script>
-                
     <script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js"></script>
     <script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js"></script>
     <script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics.js"></script> 
@@ -352,7 +251,7 @@
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
-    <!-- <script type="module">
+    <script type="module">
         import { getDatabase, ref, get, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
     
@@ -373,8 +272,124 @@
 
         // Get a reference to the database node
         const recordRef = ref(database, 'Record');
+        const issuesRef = ref(database, 'Issue');
+        // Fetch data for the charts from the database
+        const medicationRef = ref(database, 'Medication');
+        onValue(medicationRef, (snapshot) => {
+            const medicationData = snapshot.val();
+            const typeCounts = {};
+
+            // Accumulate instances for each type
+            for (const key in medicationData) {
+                const type = medicationData[key].type;
+                if (typeCounts[type]) {
+                    typeCounts[type]++;
+                } else {
+                    typeCounts[type] = 1;
+                }
+            }
+
+            // Format data for the pie chart
+            const pieData = [];
+            for (const type in typeCounts) {
+                pieData.push({ 'x': type, 'y': typeCounts[type] });
+            }
+
+            // Create the pie chart
+            const pie = new ej.charts.AccumulationChart({
+                title: "Medication Type",
+                legendSettings: { visible: true },
+                series: [
+                    {
+                        dataSource: pieData,
+                        dataLabel: { visible: true, position: 'Inside' },
+                        xName: 'x',
+                        yName: 'y'
+                    }
+                ],
+                tooltip: { enable: true, header: 'Medication name', format: '${point.x}:<b> ${point.y}%<b>' },
+            });
+            pie.appendTo('#containerpie');
+        });
+
+        onValue(issuesRef, (snapshot) => {
+    const issuesData = snapshot.val();
+    const statusCounts = { 'SOLVED': 0, 'UNSOLVED': 0 };
+
+    // Accumulate instances for each status
+    for (const key in issuesData) {
+        const status = issuesData[key].status;
+        if (status === 'SOLVED' || status === 'UNSOLVED') {
+            statusCounts[status]++;
+        }
+    }
+
+    // Format data for the chart
+    const chartData = [];
+    for (const status in statusCounts) {
+        chartData.push({ 'country': status, 'medal': statusCounts[status] });
+    }
+
+    // Create the chart
+    const chart = new ej.charts.Chart({
+        title: 'Issues recorded',
+        primaryXAxis: { valueType: 'Category', title: 'Issue category' },
+        primaryYAxis: { title: 'Number of issues' },
+        series: [
+            {
+                type: 'Column',
+                dataSource: chartData,
+                xName: 'country',
+                yName: 'medal',
+                marker: { visible: true, dataLabel: { visible: true } }
+            }
+        ],
+    });
+    chart.appendTo('#containerissue');
+});
+
+onValue(recordRef, (snapshot) => {
+    const recordData = snapshot.val();
+    const medicationCounts = {};
+
+    // Accumulate quantityR for each unique medication name
+    for (const key in recordData) {
+        const name = recordData[key].name;
+        const quantityR = parseInt(recordData[key].quantityR);
+        if (medicationCounts[name]) {
+            medicationCounts[name] += quantityR;
+        } else {
+            medicationCounts[name] = quantityR;
+        }
+    }
+
+    // Format data for the chart
+    const chartData = [];
+    for (const name in medicationCounts) {
+        chartData.push({ 'country': name, 'medal': medicationCounts[name] });
+    }
+
+    // Create the chart
+    const chart = new ej.charts.Chart({
+        title: 'Record of Medication used',
+        primaryXAxis: { valueType: 'Category', title: 'Medication Name' },
+        primaryYAxis: { title: 'Number of medicine used' },
+        series: [
+            {
+                type: 'Column',
+                dataSource: chartData,
+                xName: 'country',
+                yName: 'medal',
+                marker: { visible: true, dataLabel: { visible: true } }
+            }
+        ],
+    });
+    chart.appendTo('#container');
+});
+
+        
     </script>
-     -->
+    
 </body>
 
 </html>
