@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EzPharma</title>
+    <!-- ======= Styles ====== -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js" type="text/javascript"></script>
+
+</head>
+<body>
+
+    <!-- =============== Navigation ================ -->
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="logo-medium"></ion-icon>
+                        </span>
+                        <span class="title">EzPharma</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="index.html">
+                        <span class="icon">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </span>
+                        <span class="title">Dashboard</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="staff.html">
+                        <span class="icon">
+                            <ion-icon name="people-outline"></ion-icon>
+                        </span>
+                        <span class="title">Staff</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="inventory.html">
+                        <span class="icon">
+                            <ion-icon name="medkit-outline"></ion-icon>
+                        </span>
+                        <span class="title">Inventory</span>
+                    </a>
+                </li>
+
+                
+
+                <li>
+                    <a href="issue.html">
+                        <span class="icon">
+                            <ion-icon name="chatbubble-outline"></ion-icon>
+                        </span>
+                        <span class="title">Issues</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="record.html">
+                        <span class="icon">
+                            <ion-icon name="newspaper-outline"></ion-icon>
+                        </span>
+                        <span class="title">Reporting and Analytics</span>
+                    </a>
+                </li>
+
+                <!-- <li>
+                    <a href="profile.html">
+                        <span class="icon">
+                            <ion-icon name="settings-outline"></ion-icon>
+                        </span>
+                        <span class="title">Profile</span>
+                    </a>
+                </li> -->
+
+                <!-- <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="log-out-outline"></ion-icon>
+                        </span>
+                        <span class="title">Sign Out</span>
+                    </a>
+                </li> -->
+            </ul>
+        </div>
+
+        <!-- ========================= Main ==================== -->
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+            </div>
+
+            <!-- ================ User Details List ================= -->
+            <div class="details">
+                <div class="recentOrders">
+                    <div class="cardHeader">
+                        <h2>Active user</h2>                       
+                        <a href="#" class="btn" onclick="openModal()">Add new </a>
+                    </div>
+                    <h3 style="color: rgb(22, 11, 237);">Highlighted items indicate the admins</h3>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>First Name</td>
+                                <td>Last Name</td>
+                                <td>UserName</td>
+                                <td>Email</td>
+                                <td>Phone no.</td>
+                                <td>Role</td>
+                                <td>Action</td>
+                            </tr>
+                        </thead>
+
+                        <tbody></tbody>
+                        
+                    </table>
+                    
+            
+                    <div id="addUserModal" class="modal" style="display: none;">
+                        <div class="modal-content">
+                            <span class="close" onclick="closeModal()">&times;</span>
+                            <h2>Add New User</h2>
+                            <form id="addUserForm">
+                                <div class="form-group">
+                                <label for="newFirstName">First Name:</label>
+                                <input type="text" id="newFirstName" name="newFirstName" required>
+                                </div>
+                                <div class="form-group">
+                                <label for="newLastName">Last Name:</label>
+                                <input type="text" id="newLastName" name="newLastName" required>
+                                </div>
+                                <div class="form-group">
+                                <label for="newEmail">Email:</label>
+                                <input type="email" id="newEmail" name="newEmail" required>
+                                </div>
+                                <div class="form-group">
+                                <label for="newPhone">Phone:</label>
+                                <input type="text" id="newPhone" name="newPhone" required>
+                                </div>
+                                <div class="form-group">
+                                    <select id="newRole" name="newRole" required>
+                                        <option value="Admin">Admin</option>
+                                        <option value="User">User</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                <label for="newPassword">Password:</label>
+                                <input type="password" id="newPassword" name="newPassword" required>
+                                </div>
+                                <!-- <button type="button" onclick="addNewUser()">Add User</button> -->
+                                <button type="button" id="saveData">Add User</button>
+
+                                <button type="button" id="cancelButton" onclick="closeModal()">Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+<!-- Import Firebase SDK-->
+<script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js"></script>
+<script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js"></script>
+<script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics.js"></script> 
+
+<!-- Import Firebase SDK and your JavaScript file -->
+<script type="module" src="assets/js/firebase-config.js"></script>
+<script type="module" src="assets/js/staff.js"></script> 
+
+
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    import { getDatabase, ref, set, onValue, update, remove } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+
+    const firebaseConfig = {
+    apiKey: "AIzaSyCrAH8oV-uyEdlWH3uNRgWhRh8Pjler4fk",
+    authDomain: "dentalpro-2a34a.firebaseapp.com",
+    databaseURL: "https://dentalpro-2a34a-default-rtdb.firebaseio.com",
+    projectId: "dentalpro-2a34a",
+    storageBucket: "dentalpro-2a34a.appspot.com",
+    messagingSenderId: "365392282595",
+    appId: "1:365392282595:web:9af6ec80ca1545a61616d6",
+    measurementId: "G-TVTLCXW8WE"
+  };
+  
+      // Initialize Firebase
+       const app = initializeApp(firebaseConfig);
+       const database = getDatabase(app);
+       const auth = getAuth(app); // Initialize the auth variable
+  
+    saveData.addEventListener('click',(e) => {
+    var newFirstName = document.getElementById('newFirstName').value;
+    var newLastName = document.getElementById('newLastName').value;
+    var newEmail = document.getElementById('newEmail').value;
+    var newPassword = document.getElementById('newPassword').value;
+    var newPhone = document.getElementById('newPhone').value;
+    var newRole = document.getElementById('newRole').value;
+
+    // Generate username using first name and last name
+    var newUsername = newFirstName + newLastName;
+
+    // Create user in Firebase Authentication first
+    createUserWithEmailAndPassword(auth, newEmail, newPassword)
+        .then((userCredential) => {
+            // Get the UID of the newly created user
+            const uid = userCredential.user.uid;
+
+            // Use the UID as the identifier in the database
+            set(ref(database, 'User/' + uid), {
+                firstName: newFirstName,
+                lastName: newLastName,
+                username: newUsername,
+                email: newEmail,
+                phone: newPhone,
+                role: newRole,
+                profilePicture: ""
+            }).then(() => {
+                closeModal();
+                alert('User added successfully!');
+            }).catch((error) => {
+                console.error('Error saving user data:', error.message);
+                alert('New user added');
+            });
+        })
+        .catch((error) => {
+            console.error('Error adding user:', error.message);
+            // alert('Error adding user. Please check your input and try again.');
+        });
+});
+
+  
+  </script>
+
+
+<!-- ====== ionicons ======= -->
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>

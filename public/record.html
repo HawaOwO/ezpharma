@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EzPharma</title>
+    <!-- ======= Styles ====== -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+
+</head>
+<body>
+
+    <!-- =============== Navigation ================ -->
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="logo-medium"></ion-icon>
+                        </span>
+                        <span class="title">EzPharma</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="index.html">
+                        <span class="icon">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </span>
+                        <span class="title">Dashboard</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="staff.html">
+                        <span class="icon">
+                            <ion-icon name="people-outline"></ion-icon>
+                        </span>
+                        <span class="title">Staff</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="inventory.html">
+                        <span class="icon">
+                            <ion-icon name="medkit-outline"></ion-icon>
+                        </span>
+                        <span class="title">Inventory</span>
+                    </a>
+                </li>
+
+                
+
+                <li>
+                    <a href="issue.html">
+                        <span class="icon">
+                            <ion-icon name="chatbubble-outline"></ion-icon>
+                        </span>
+                        <span class="title">Issues</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="record.html">
+                        <span class="icon">
+                            <ion-icon name="newspaper-outline"></ion-icon>
+                        </span>
+                        <span class="title">Reporting and Analytics</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+        <!-- ========================= Main ==================== -->
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+                <!-- <div class="report-download">
+                        <button id="downloadReportBtn">Download Report</button>
+                </div> -->
+            </div>
+                    <div class="cardHeader">
+                        <h2 style="padding: 30px;">Report Insight</h2>
+                    </div>
+                    
+                    <div class="card-container" style="padding: 30px;">
+                        <div class="chart card">
+                            <div class="cardBox3" >
+                                <div class="card" style="width: 100%;">
+                                    <div>
+                                        <div class="numbers out-of-stock"></div>
+                                        <div class="cardName">Medication running out stock</div>
+                                    </div>
+                                    <div class="iconBx">
+                                        <ion-icon name="alert-circle-outline"></ion-icon>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div>
+                                        <div class="numbers med-today"></div>
+                                        <div class="cardName">Total medications scanned/used today</div>
+                                    </div>
+                                    <div class="iconBx">
+                                        <ion-icon name="qr-code-outline"></ion-icon>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div>
+                                        <div class="numbers record-today"></div>
+                                        <div class="cardName">Daily record today</div>
+                                    </div>
+                                    <div class="iconBx">
+                                        <ion-icon name="receipt-outline"></ion-icon>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cardHeader" >
+                        <h2 style="padding: 30px;">Medication analytics</h2>
+                    </div>
+                    <div class="card-container" style="padding: 30px;">
+                        <div class="chart card">
+                            <div class="card">
+                            <div class="cardName" style="padding: 10px;">Most used medication during these period: </div>
+                                <div class="date-range-picker">
+                                    <div class="date-picker">
+                                        <!-- <label for="startDate">Start Date:</label> -->
+                                        <input type="text" id="startDate" placeholder="Select Start Date">
+                                    </div>
+                                    <div class="arrow1">&#187;</div>
+                                    <div class="date-picker">
+                                        <!-- <label for="endDate">End Date:</label> -->
+                                        <input type="text" id="endDate" placeholder="Select End Date">
+                                    </div>
+                                </div>
+                                <div class="output" style="padding: 10px; background-color: #05dd8e;" id="outputResultMostUsed"></div>
+                            </div>
+                        </div>
+                        <div class="chart card">
+                            <div class="card">
+                                <div class="cardName" style="padding: 10px;">Illness most frequent will happen between these period: </div>
+                                <div class="date-range-picker">
+                                    <div class="date-picker">
+                                        <!-- <label for="forecastStartDate">Start Date:</label> -->
+                                        <input type="text" id="forecastStartDate" placeholder="Select Start Date">
+                                    </div>
+                                    <div class="arrow1">&#187;</div>
+                                    <div class="date-picker">
+                                        <!-- <label for="forecastEndDate">End Date:</label> -->
+                                        <input type="text" id="forecastEndDate" placeholder="Select End Date">
+                                    </div>
+                                </div>
+                                <div class="output" style="padding: 10px; background-color: #05dd8e;" id="outputResultForecast"></div>
+                            </div>
+                         </div>   
+                    </div>
+                        
+                    
+
+            <!-- ================ User Details List ================= -->
+            <div class="details">
+                <div class="recentOrders"> 
+                    <!-- style="margin-right: 20px;" -->
+                    <div class="cardHeader">
+                        <h2>Record of medication usage</h2>
+                        <!-- <a href="#" class="btn">Add new </a> -->
+                        <!-- <div class="report-download">
+                            <button id="downloadReportBtn">Download Report</button>
+                        </div> -->
+                        
+                        
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Medication Name</td>
+                                <td>Used Quantity</td>
+                                <td>Date</td>
+                            </tr>
+                        </thead>
+
+                        <tbody></tbody>
+                        
+                    </table>
+                   
+                </div>
+            </div>
+            <div class="details">
+                <div class="recentOrders">
+                    <div class="cardHeader">
+                        <h2>Medications running out of stocks</h2>                        
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Medication Name</td>
+                                <td>Quantity Left</td>
+                                <td>Type</td>
+                            </tr>
+                        </thead>
+                        <tbody class="lowStockMedications"></tbody>
+                        
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ <!-- Import jsPDF library -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.15/jspdf.plugin.autotable.min.js"></script>
+
+<script>
+    window.jsPDF = window.jspdf.jsPDF;
+</script>
+
+<!-- Import Firebase SDK-->
+<script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js"></script>
+<script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js"></script>
+<script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics.js"></script> 
+
+<!-- Import Firebase SDK and your JavaScript file -->
+<script type="module" src="assets/js/firebase-config.js"></script>
+<script type="module" src="assets/js/record.js"></script> 
+
+<!-- ====== ionicons ======= -->
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+
+</body>
+
+</html>

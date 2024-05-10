@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EzPharma</title>
+    <!-- ======= Styles ====== -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <!-- =============== Navigation ================ -->
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="logo-medium"></ion-icon>
+                        </span>
+                        <span class="title">EzPharma</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="index.html">
+                        <span class="icon">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </span>
+                        <span class="title">Dashboard</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="staff.html">
+                        <span class="icon">
+                            <ion-icon name="people-outline"></ion-icon>
+                        </span>
+                        <span class="title">Staff</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="inventory.html">
+                        <span class="icon">
+                            <ion-icon name="medkit-outline"></ion-icon>
+                        </span>
+                        <span class="title">Inventory</span>
+                    </a>
+                </li>
+
+                
+
+                <li>
+                    <a href="issue.html">
+                        <span class="icon">
+                            <ion-icon name="chatbubble-outline"></ion-icon>
+                        </span>
+                        <span class="title">Issues</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="record.html">
+                        <span class="icon">
+                            <ion-icon name="newspaper-outline"></ion-icon>
+                        </span>
+                        <span class="title">Reporting and Analytics</span>
+                    </a>
+                </li>
+
+
+                <!-- <li>
+                    <a href="profile.html">
+                        <span class="icon">
+                            <ion-icon name="settings-outline"></ion-icon>
+                        </span>
+                        <span class="title">Profile</span>
+                    </a>
+                </li> -->
+
+                <!-- <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="lock-closed-outline"></ion-icon>
+                        </span>
+                        <span class="title">Password</span>
+                    </a>
+                </li> -->
+
+                <li>
+                    <a href="#" id="logoutButton">
+                        <span class="icon">
+                            <ion-icon name="log-out-outline"></ion-icon>
+                        </span>
+                        <span class="title">Sign Out</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- ========================= Main ==================== -->
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+
+                <!-- <div class="search">
+                    <label>
+                        <input type="text" placeholder="Search here">
+                        <ion-icon name="search-outline"></ion-icon>
+                    </label>
+                </div> -->
+
+                <!-- <div class="user">
+                    <img id="profilePicture" src="" alt="">
+                </div> -->
+            </div>
+
+            <!-- ======================= Cards ================== -->
+            <div class="cardHeader">
+                <h2 style="padding: 30px;">Welcome to EzPharma</h2> 
+
+            <div class="cardBox">
+                <div class="card">
+                    <div>
+                        <div class="numbers daily-use"></div>
+                        <div class="cardName">Total use</div>
+                    </div>
+
+                    <div class="iconBx">
+                        <ion-icon name="eye-outline"></ion-icon>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <div class="numbers low-stock"></div>
+                        <div class="cardName">Low on Stock</div>
+                    </div>
+
+                    <div class="iconBx">
+                        <ion-icon name="alert-circle-outline"></ion-icon>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <div class="numbers staff"></div>
+                        <div class="cardName">Staff</div>
+                    </div>
+
+                    <div class="iconBx">
+                        <ion-icon name="people-outline"></ion-icon>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div>
+                        <div class="numbers issue"></div>
+                        <div class="cardName">Issues</div>
+                    </div>
+
+                    <div class="iconBx">
+                        <ion-icon name="chatbubbles-outline"></ion-icon>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="cardHeader">
+                <h2 style="padding: 30px;">Dashboard</h2>
+            
+
+            <div class="cardBox">
+                <a href="staff.html" class="card" style="background-color:#2a2185 ; height: 220px">
+                    <div>
+                        <div class="cardName" style="color: white; font-size: 20px;">Staff</div>
+                    </div>
+                    <div class="iconBx" style="font-size: 100px; ">
+                        <ion-icon name="people-outline"></ion-icon>
+                    </div>
+                </a>
+
+                <a href="inventory.html" class="card" style="background-color:#6676B9 ; height: 220px">
+                    <div>
+                        <div class="cardName" style="color: white; font-size: 20px;">Inventory</div>
+                    </div>
+                    <div class="iconBx" style="font-size: 100px; ">
+                        <ion-icon name="medkit-outline"></ion-icon>
+                    </div>
+                </a>
+
+                <a href="issue.html" class="card" style="background-color: #98C4D8 ; height: 220px">
+                    <div>
+                        <div class="cardName" style="color: white; ">Issues</div>
+                    </div>
+                    <div class="iconBx" style="font-size: 100px; ">
+                        <ion-icon name="chatbubbles-outline"></ion-icon>
+                    </div>
+                </a>
+                
+                <a href="record.html" class="card" style="background-color: #84E3F9; height: 220px">
+                    <div>
+                        <div class="cardName" style="color: white; font-size: 20px;">Reporting and Analytics</div>
+                    </div>
+                    <div class="iconBx" style="font-size: 100px; ">
+                        <ion-icon name="newspaper-outline"></ion-icon>
+                    </div>
+                </a>
+                </div>
+            </div>
+
+            <div class="cardHeader" >
+                <h2 style="padding: 30px;">Modules Insight</h2>
+
+            <div class="chart card">
+                <div id="container"></div>
+            </div>
+                         
+            <div class="card-container" style="padding: 30px;">
+                <div class="chart card">
+                    <div id="containerpie"></div> 
+                </div>
+                <div class="chart card">
+                    <div id="containerissue"></div>
+                </div>
+            </div>
+        </div>
+            
+         </div>
+        </div>
+
+    </div>   
+
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics.js"></script> 
+
+    <!-- Import Firebase SDK and your JavaScript file -->
+    <script type="module" src="assets/js/firebase-config.js"></script>
+
+    <!-- =========== Scripts =========  -->
+    <script type="module" src="assets/js/main.js"></script>
+
+    <!-- ====== ionicons ======= -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <script type="module">
+        import { getDatabase, ref, get, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    
+        import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyCrAH8oV-uyEdlWH3uNRgWhRh8Pjler4fk",
+            authDomain: "dentalpro-2a34a.firebaseapp.com",
+            databaseURL: "https://dentalpro-2a34a-default-rtdb.firebaseio.com",
+            projectId: "dentalpro-2a34a",
+            storageBucket: "dentalpro-2a34a.appspot.com",
+            messagingSenderId: "365392282595",
+            appId: "1:365392282595:web:9af6ec80ca1545a61616d6",
+            measurementId: "G-TVTLCXW8WE"
+            };
+
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+        const auth = getAuth();
+
+        // Get a reference to the database node
+        const recordRef = ref(database, 'Record');
+        const issuesRef = ref(database, 'Issue');
+        const staffRef = ref(database, 'User');
+        // Fetch data for the charts from the database
+        const medicationRef = ref(database, 'Medication');
+        onValue(medicationRef, (snapshot) => {
+            const medicationData = snapshot.val();
+            const typeCounts = {};
+
+            // Accumulate instances for each type
+            for (const key in medicationData) {
+                const type = medicationData[key].type;
+                if (typeCounts[type]) {
+                    typeCounts[type]++;
+                } else {
+                    typeCounts[type] = 1;
+                }
+            }
+
+            // Format data for the pie chart
+            const pieData = [];
+            for (const type in typeCounts) {
+                pieData.push({ 'x': type, 'y': typeCounts[type] });
+            }
+
+            // Create the pie chart
+            const pie = new ej.charts.AccumulationChart({
+                title: "Medication Type",
+                legendSettings: { visible: true },
+                series: [
+                    {
+                        dataSource: pieData,
+                        dataLabel: { visible: true, position: 'Inside' },
+                        xName: 'x',
+                        yName: 'y'
+                    }
+                ],
+                tooltip: { enable: true, header: 'Medication name', format: '${point.x}:<b> ${point.y}<b>' },
+            });
+            pie.appendTo('#containerpie');
+        });
+
+        onValue(issuesRef, (snapshot) => {
+    const issuesData = snapshot.val();
+    const statusCounts = { 'SOLVED': 0, 'UNSOLVED': 0 };
+
+    // Accumulate instances for each status
+    for (const key in issuesData) {
+        const status = issuesData[key].status;
+        if (status === 'SOLVED' || status === 'UNSOLVED') {
+            statusCounts[status]++;
+        }
+    }
+
+    // Format data for the chart
+    const chartData = [];
+    for (const status in statusCounts) {
+        chartData.push({ 'country': status, 'medal': statusCounts[status] });
+    }
+
+    // Create the chart
+    const chart = new ej.charts.Chart({
+        title: 'Issues recorded',
+        primaryXAxis: { valueType: 'Category', title: 'Issue category' },
+        primaryYAxis: { title: 'Number of issues' },
+        series: [
+            {
+                type: 'Column',
+                dataSource: chartData,
+                xName: 'country',
+                yName: 'medal',
+                marker: { visible: true, dataLabel: { visible: true } }
+            }
+        ],
+    });
+    chart.appendTo('#containerissue');
+});
+
+onValue(recordRef, (snapshot) => {
+    const recordData = snapshot.val();
+    const medicationCounts = {};
+
+    // Accumulate quantityR for each unique medication name
+    for (const key in recordData) {
+        const name = recordData[key].name;
+        const quantityR = parseInt(recordData[key].quantityR);
+        if (medicationCounts[name]) {
+            medicationCounts[name] += quantityR;
+        } else {
+            medicationCounts[name] = quantityR;
+        }
+    }
+
+    // Format data for the chart
+    const chartData = [];
+    for (const name in medicationCounts) {
+        chartData.push({ 'country': name, 'medal': medicationCounts[name] });
+    }
+
+    // Create the chart
+    const chart = new ej.charts.Chart({
+        title: 'Record of Medication used',
+        primaryXAxis: { valueType: 'Category', title: 'Medication Name' },
+        primaryYAxis: { title: 'Number of medicine used' },
+        series: [
+            {
+                type: 'Column',
+                dataSource: chartData,
+                xName: 'country',
+                yName: 'medal',
+                marker: { visible: true, dataLabel: { visible: true } }
+            }
+        ],
+    });
+    chart.appendTo('#container');
+});
+
+
+function updateCardNumbers() {
+  // Fetch data from the database and update the cards accordingly
+  get(recordRef).then((snapshot) => {
+    let dailyUseCount = 0;
+    // Loop through each child and count them
+    snapshot.forEach((childSnapshot) => {
+        dailyUseCount++;
+    });
+    // Update the number of daily uses
+    document.querySelector('.numbers.daily-use').innerText = dailyUseCount;
+    console.log(dailyUseCount);
+});
+
+  // Fetch data from the database and update the cards accordingly
+  get(medicationRef).then((snapshot) => {
+      let lowStockCount = 0;
+      // Loop through each medication to count low stock items
+      snapshot.forEach((medSnapshot) => {
+          const medication = medSnapshot.val();
+          if (medication.quantity < 20) {
+              lowStockCount++;
+          }
+      });
+      // Update the number of low stock items
+      document.querySelector('.numbers.low-stock').innerText = lowStockCount;
+  });
+
+  //for number of staff
+
+  get(staffRef).then((snapshot) => {
+    let staffCount = 0;
+    // Loop through each child and count them
+    snapshot.forEach((childSnapshot) => {
+        staffCount++;
+    });
+    // Update the number of daily uses
+    document.querySelector('.numbers.staff').innerText = staffCount;
+});
+
+//for issue
+
+get(issuesRef).then((snapshot) => {
+  let issueCount = 0;
+  // Loop through each child and count them
+  snapshot.forEach((childSnapshot) => {
+      issueCount++;
+  });
+  // Update the number of daily uses
+  document.querySelector('.numbers.issue').innerText = issueCount;
+});
+  // Fetch data from the database and update the cards accordingly
+
+}
+// Call the function to update card numbers when the page loads
+document.addEventListener('DOMContentLoaded', updateCardNumbers);
+
+const logoutButton = document.getElementById('logoutButton');
+logoutButton.addEventListener('click', () => {
+  // Sign out the user
+  auth.signOut().then(() => {
+      // Redirect the user to the login page
+      window.location.href = 'login.html';
+  }).catch((error) => {
+      // Handle any errors that occur during sign out
+      console.error('Error signing out:', error);
+  });
+});
+    </script>
+    
+</body>
+
+</html>

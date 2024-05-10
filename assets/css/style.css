@@ -547,7 +547,7 @@ button:hover {
 .details .recentOrders table tr:last-child {
   border-bottom: none;
 }
-.details .recentOrders table tbody tr:hover {
+.details .recentOrders table tbody tr:hover:not(.highlight-row) {
   background: var(--blue);
   color: var(--white);
 }
@@ -638,6 +638,37 @@ button:hover {
 }
 .recentCustomers table tr:hover td h4 span {
   color: var(--white);
+}
+
+
+/* Style for the information icon */
+.info-icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  font-size: 20px; /* Adjust icon size */
+  cursor: help; /* Set cursor to pointer */
+  margin-left: 5px; 
+  position: relative;/* Adjust spacing between the text and the icon */
+}
+
+/* Tooltip for information text */
+.info-icon:hover .info-text {
+  display: block;
+}
+
+.info-text {
+  display: none;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+  white-space: nowrap;
+  z-index: 9999;
+  top: calc(100% + 5px); /* Position the tooltip below the info-icon */
+  left: 0; /* Align the tooltip with the left edge of the icon */
 }
 /* Add this style to your CSS */
 .modal {

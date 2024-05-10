@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EzPharma</title>
+    <!-- ======= Styles ====== -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js" type="text/javascript"></script>
+
+</head>
+<body>
+
+    <!-- =============== Navigation ================ -->
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="logo-medium"></ion-icon>
+                        </span>
+                        <span class="title">EzPharma</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="index.html">
+                        <span class="icon">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </span>
+                        <span class="title">Dashboard</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="staff.html">
+                        <span class="icon">
+                            <ion-icon name="people-outline"></ion-icon>
+                        </span>
+                        <span class="title">Staff</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="inventory.html">
+                        <span class="icon">
+                            <ion-icon name="medkit-outline"></ion-icon>
+                        </span>
+                        <span class="title">Inventory</span>
+                    </a>
+                </li>
+
+                
+                <li>
+                    <a href="issue.html">
+                        <span class="icon">
+                            <ion-icon name="chatbubble-outline"></ion-icon>
+                        </span>
+                        <span class="title">Issues</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="record.html">
+                        <span class="icon">
+                            <ion-icon name="newspaper-outline"></ion-icon>
+                        </span>
+                        <span class="title">Reporting and Analytics</span>
+                    </a>
+                </li>
+
+                <!-- <li>
+                    <a href="profile.html">
+                        <span class="icon">
+                            <ion-icon name="settings-outline"></ion-icon>
+                        </span>
+                        <span class="title">Profile</span>
+                    </a>
+                </li> -->
+
+                <!-- <li>
+                    <a href="#">
+                        <span class="icon" id="logoutButton">
+                            <ion-icon name="log-out-outline"></ion-icon>
+                        </span>
+                        <span class="title">Sign Out</span>
+                    </a>
+                </li> -->
+            </ul>
+        </div>
+
+        <!-- ========================= Main ==================== -->
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+            </div>
+
+            <!-- ================ User Details List ================= -->
+            <div class="details">
+                <div class="recentOrders">
+                    <div class="cardHeader">
+                        <h2>Listed Medication</h2>
+                        <!-- <div class="select-container">
+                            <label for="medicationType">Select Type:</label>
+                            <select id="medicationType">
+                                <option value="All">All</option>
+                                <option value="TABLET">TABLET</option>
+                                <option value="LIQUID (INTERNAL USE)">LIQUID (INTERNAL USE)</option>
+                                <option value="INHALATIONS">INHALATIONS</option>
+                                <option value="EYE DROP/ OINTMENT">EYE DROP/ OINTMENT</option>
+                                <option value="SUPPOSITORY/ENEMA/PESSARY">SUPPOSITORY/ENEMA/PESSARY</option>
+                                <option value="CREAM/LOTION">CREAM/LOTION</option>
+                                <option value="NOSE DROP/ SPRAY">NOSE DROP/ SPRAY</option>
+                                <option value="INJECTIONS">INJECTIONS</option>
+                                <option value="LIQUID (EXTERNAL USE)">LIQUID (EXTERNAL USE)</option>
+                                <option value="CAPSULE">CAPSULE</option>
+                                
+                            </select>
+                        </div> -->
+                        <a href="#" class="btn">Add new </a>
+                        
+                        
+                    </div>
+                    <h3 style="color: rgb(22, 11, 237);">Highlighted items indicate the medications that are running of stock</h3>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Medication Name</td>
+                                <td>Description</td>
+                                <td>Quantity</td>
+                                <td>Type</td>
+                                <td>Date</td>
+                                <td>Actions</td>
+                            </tr>
+                        </thead>
+
+                        <tbody></tbody>
+                        
+                    </table>
+
+                    <div id="addMedModal" class="modal" style="display: none;">
+                        <div class="modal-content">
+                            <span class="close" onclick="closeModal()">&times;</span>
+                            <h2>Add New Medication</h2>
+                            <form id="addMedForm">
+                                <div class="form-group">
+                                <label for="medName">Medication Name:</label>
+                                <input type="text" id="medName" name="medName" required>
+                                </div>
+                                <div class="form-group">
+                                <label for="medDescription">Description:</label>
+                                <input type="text" id="medDescription" name="medDescription" required>
+                                </div>
+                                <div class="form-group">
+                                <label for="medQuantity">Quantity:</label>
+                                <input type="text" id="medQuantity" name="medQuantity" required>
+                                </div>
+                                <div class="form-group">
+                                <label for="medType">Type:</label>
+                                <select id="medType" name="medType" required>
+                                    <option value="TABLET">TABLET</option>
+                                    <option value="LIQUID (INTERNAL USE)">LIQUID (INTERNAL USE)</option>
+                                    <option value="INHALATIONS">INHALATIONS</option>
+                                    <option value="EYE DROP/ OINTMENT">EYE DROP/ OINTMENT</option>
+                                    <option value="SUPPOSITORY/ENEMA/PESSARY">SUPPOSITORY/ENEMA/PESSARY</option>
+                                    <option value="CREAM/LOTION">CREAM/LOTION</option>
+                                    <option value="NOSE DROP/ SPRAY">NOSE DROP/ SPRAY</option>
+                                    <option value="INJECTIONS">INJECTIONS</option>
+                                    <option value="LIQUID (EXTERNAL USE)">LIQUID (EXTERNAL USE)</option>
+                                    <option value="CAPSULE">CAPSULE</option>
+                                    
+                                </select>
+                                </div>
+                                <div class="form-group date-group">
+                                    <label for="medDate">Expired Date:</label>
+                                    <div class="date-inputs">
+                                        <input type="text" id="medDay" name="medDay" placeholder="Day" required>
+                                        <select id="medMonth" name="medMonth" required>
+                                            <option value="January">January</option>
+                                            <option value="February">February</option>
+                                            <option value="March">March</option>
+                                            <option value="April">April</option>
+                                            <option value="May">May</option>
+                                            <option value="June">June</option>
+                                            <option value="July">July</option>
+                                            <option value="August">August</option>
+                                            <option value="September">September</option>
+                                            <option value="October">October</option>
+                                            <option value="November">November</option>
+                                            <option value="December">December</option>
+                                        </select>
+                                        <input type="text" id="medYear" name="medYear" placeholder="Year" required>
+                                    </div>
+                                </div>
+                                <button type="button" id="saveData">Save</button>
+
+                                <button type="button" id="cancelButton" onclick="closeModal()">Cancel</button>
+                                <!-- Include an input field to store the key of the medication being edited -->
+                                <input type="hidden" id="medKey" name="medKey">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="chart card">
+                    <div id="containerpie" style="width: 300px; height: 300px;" ></div> 
+                </div> -->
+
+            </div>
+        </div>
+    </div>
+
+<!-- Import Firebase SDK-->
+<script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js"></script>
+<script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js"></script>
+<script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics.js"></script> 
+
+<!-- Import Firebase SDK and your JavaScript file -->
+<script type="module" src="assets/js/firebase-config.js"></script>
+<script type="module" src="assets/js/inventory.js"></script> 
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js";
+  import { getDatabase, ref, set, onValue, update, remove, push } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-database.js";
+
+  const firebaseConfig = {
+  apiKey: "AIzaSyCrAH8oV-uyEdlWH3uNRgWhRh8Pjler4fk",
+  authDomain: "dentalpro-2a34a.firebaseapp.com",
+  databaseURL: "https://dentalpro-2a34a-default-rtdb.firebaseio.com",
+  projectId: "dentalpro-2a34a",
+  storageBucket: "dentalpro-2a34a.appspot.com",
+  messagingSenderId: "365392282595",
+  appId: "1:365392282595:web:9af6ec80ca1545a61616d6",
+  measurementId: "G-TVTLCXW8WE"
+};
+
+    // Initialize Firebase
+     const app = initializeApp(firebaseConfig);
+     const database = getDatabase(app);
+
+    saveData.addEventListener('click',(e) => {
+    var medName = document.getElementById('medName').value;
+    var medDescription = document.getElementById('medDescription').value;
+    var medQuantity = parseInt(document.getElementById('medQuantity').value); // Convert to integer    
+    var medType = document.getElementById('medType').value;
+    var medDay = document.getElementById('medDay').value;
+    var medMonth = document.getElementById('medMonth').value;
+    var medYear = document.getElementById('medYear').value;
+    var medPicture = ""; // Add medPicture as an empty string
+
+    // Get the medication key if it exists
+    var medKey = document.getElementById('medKey').value;
+
+    // If medKey exists, update the existing medication data
+    if (medKey) {
+        update(ref(database, `Medication/${medKey}`), {
+            name: medName,
+            details: medDescription,
+            quantity: medQuantity,
+            type: medType,
+            day: medDay,
+            month: medMonth,
+            year: medYear,
+            medPicture: medPicture
+        }).then(() => {
+            alert('Medication updated successfully');
+            closeModal(); // Close the modal after successful update
+        }).catch((error) => {
+            console.error("Error updating medication:", error);
+        });
+    } else {
+        // If medKey does not exist, add a new medication
+        const newMedicationRef = push(ref(database, 'Medication'));
+        const newMedicationKey = newMedicationRef.key;
+
+        set(ref(database, `Medication/${newMedicationKey}`), {
+            name: medName,
+            details: medDescription,
+            quantity: medQuantity,
+            type: medType,
+            day: medDay,
+            month: medMonth,
+            year: medYear,
+            medPicture: medPicture
+        }).then(() => {
+            alert('Medication saved successfully');
+            closeModal(); // Close the modal after successful save
+        }).catch((error) => {
+            console.error("Error saving medication:", error);
+        });
+    }
+});
+    // // Generate a unique key for the new medication
+    // const newMedicationRef = push(ref(database, 'Medication'));
+
+    // // Get the unique key generated by push
+    // const newMedicationKey = newMedicationRef.key;
+
+    // set(ref(database, `Medication/${newMedicationKey}` ), {
+
+    //     name: medName,
+    //     details: medDescription,
+    //     quantity: medQuantity,
+    //     type: medType,
+    //     day: medDay,
+    //     month: medMonth,
+    //     year: medYear,
+    //     medPicture: medPicture
+
+    //  });
+
+    // alert('saved');
+    // });
+</script>
+
+<!-- ====== ionicons ======= -->
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>

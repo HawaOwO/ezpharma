@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('assets/imgs/background.jpg'); /* Replace 'background.jpg' with your image path */
+            background-size: cover; /* Ensure the background image covers the entire page */
+            background-repeat: no-repeat; 
+            /* Prevent the background image from repeating */
+            /* background-color: #8692f7; Choose your desired background color */
+        }
+
+        #login-box {
+            width: 300px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        #login-box h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        #login-box input[type="text"],
+        #login-box input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        #login-box input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #2a2185; /* Choose your desired button color */
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #login-box input[type="submit"]:hover {
+            background-color: #2a2185; /* Choose your desired button hover color */
+        }
+    </style>
+</head>
+
+
+<body>
+  
+<div id="login-box">
+  <div class="left">
+    <h1>Login</h1>
+    
+    <input type="text" id="email" name="email" placeholder="E-mail" />
+    <input type="password" id="password" name="password" placeholder="Password" />
+    
+    <input type="submit" id="login" name="login" value="Login" />
+  </div>
+  
+</div>
+
+<!-- Import Firebase SDK and your JavaScript file -->
+<script type="module" src="assets/js/firebase-config.js"></script>
+<script type="module" src="assets/js/login.js"></script>
+</body>
+</html>
+
+    <!-- <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        import { getDatabase, set, ref } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyCrAH8oV-uyEdlWH3uNRgWhRh8Pjler4fk",
+          authDomain: "dentalpro-2a34a.firebaseapp.com",
+          databaseURL: "https://dentalpro-2a34a-default-rtdb.firebaseio.com",
+          projectId: "dentalpro-2a34a",
+          storageBucket: "dentalpro-2a34a.appspot.com",
+          messagingSenderId: "365392282595",
+          appId: "1:365392282595:web:9af6ec80ca1545a61616d6",
+          measurementId: "G-TVTLCXW8WE"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth();
+
+        login.addEventListener('click', (e)=>{
+
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+
+            signInWithEmailAndPassword(auth, email, password)
+                        .then((userCredential) => {
+                            // Signed in 
+                            const user = userCredential.user;
+                            alert('user loged in!');
+
+                            // set(ref(database, 'User/' + user.uid, {
+                            //     username:username,
+                            //     email:email
+                            // }))
+                            // ...
+                        })
+                        .catch((error) => {
+                            const errorCode = error.code;
+                            const errorMessage = error.message;
+
+                            alert(errorMessage);
+                        });
+
+        })
+
+        
+      </script> -->
+
+    <!-- The core Firebase JS SDK is always required and must be listed first
+    <script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-app.js"></script>
+
+     TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#config-web-app -->
+<!-- 
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyCrAH8oV-uyEdlWH3uNRgWhRh8Pjler4fk",
+            authDomain: "dentalpro-2a34a.firebaseapp.com",
+            databaseURL: "https://dentalpro-2a34a-default-rtdb.firebaseio.com",
+            projectId: "dentalpro-2a34a",
+            storageBucket: "dentalpro-2a34a.appspot.com",
+            messagingSenderId: "365392282595",
+            appId: "1:365392282595:web:9af6ec80ca1545a61616d6",
+            measurementId: "G-TVTLCXW8WE"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script> -->
+    <!-- <script src="js/login.js" type="text/javascript"></script> 
+    <script type="module" src="assets/js/login.js"></script> -->
+
+

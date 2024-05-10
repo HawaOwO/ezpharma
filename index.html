@@ -255,6 +255,8 @@
         import { getDatabase, ref, get, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
     
+        import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+
         // Initialize Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyCrAH8oV-uyEdlWH3uNRgWhRh8Pjler4fk",
@@ -269,10 +271,12 @@
 
         const app = initializeApp(firebaseConfig);
         const database = getDatabase(app);
+        const auth = getAuth();
 
         // Get a reference to the database node
         const recordRef = ref(database, 'Record');
         const issuesRef = ref(database, 'Issue');
+        const staffRef = ref(database, 'User');
         // Fetch data for the charts from the database
         const medicationRef = ref(database, 'Medication');
         onValue(medicationRef, (snapshot) => {
@@ -307,7 +311,7 @@
                         yName: 'y'
                     }
                 ],
-                tooltip: { enable: true, header: 'Medication name', format: '${point.x}:<b> ${point.y}%<b>' },
+                tooltip: { enable: true, header: 'Medication name', format: '${point.x}:<b> ${point.y}<b>' },
             });
             pie.appendTo('#containerpie');
         });
@@ -387,7 +391,74 @@ onValue(recordRef, (snapshot) => {
     chart.appendTo('#container');
 });
 
-        
+
+function updateCardNumbers() {
+  // Fetch data from the database and update the cards accordingly
+  get(recordRef).then((snapshot) => {
+    let dailyUseCount = 0;
+    // Loop through each child and count them
+    snapshot.forEach((childSnapshot) => {
+        dailyUseCount++;
+    });
+    // Update the number of daily uses
+    document.querySelector('.numbers.daily-use').innerText = dailyUseCount;
+    console.log(dailyUseCount);
+});
+
+  // Fetch data from the database and update the cards accordingly
+  get(medicationRef).then((snapshot) => {
+      let lowStockCount = 0;
+      // Loop through each medication to count low stock items
+      snapshot.forEach((medSnapshot) => {
+          const medication = medSnapshot.val();
+          if (medication.quantity < 20) {
+              lowStockCount++;
+          }
+      });
+      // Update the number of low stock items
+      document.querySelector('.numbers.low-stock').innerText = lowStockCount;
+  });
+
+  //for number of staff
+
+  get(staffRef).then((snapshot) => {
+    let staffCount = 0;
+    // Loop through each child and count them
+    snapshot.forEach((childSnapshot) => {
+        staffCount++;
+    });
+    // Update the number of daily uses
+    document.querySelector('.numbers.staff').innerText = staffCount;
+});
+
+//for issue
+
+get(issuesRef).then((snapshot) => {
+  let issueCount = 0;
+  // Loop through each child and count them
+  snapshot.forEach((childSnapshot) => {
+      issueCount++;
+  });
+  // Update the number of daily uses
+  document.querySelector('.numbers.issue').innerText = issueCount;
+});
+  // Fetch data from the database and update the cards accordingly
+
+}
+// Call the function to update card numbers when the page loads
+document.addEventListener('DOMContentLoaded', updateCardNumbers);
+
+const logoutButton = document.getElementById('logoutButton');
+logoutButton.addEventListener('click', () => {
+  // Sign out the user
+  auth.signOut().then(() => {
+      // Redirect the user to the login page
+      window.location.href = 'login.html';
+  }).catch((error) => {
+      // Handle any errors that occur during sign out
+      console.error('Error signing out:', error);
+  });
+});
     </script>
     
 </body>

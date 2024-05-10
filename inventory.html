@@ -127,6 +127,7 @@
                         
                         
                     </div>
+                    <h3 style="color: rgb(22, 11, 237);">Highlighted items indicate the medications that are running of stock</h3>
 
                     <table>
                         <thead>
@@ -253,6 +254,32 @@
     var medMonth = document.getElementById('medMonth').value;
     var medYear = document.getElementById('medYear').value;
     var medPicture = ""; // Add medPicture as an empty string
+
+     // Check if any of the required fields are empty
+     if (medName === '' || medDescription === '' || medQuantity === ''  || medDay === '' || medYear === '') {
+      alert('Please fill out all the required fields.');
+      return false;
+    }
+
+    // // Check if quantity is a positive number
+    // if (parseInt(medQuantity) <= 0) {
+    //   alert('Quantity must be a positive number.');
+    //   return false;
+    // }
+
+    // Validate date number 
+    var dayRegex = /^\d+$/;
+    if (!dayRegex.test(medDay)) {
+        alert('Please enter a valid day date.');
+        return;
+    }
+
+    var yearRegex = /^\d+$/;
+    if (!yearRegex.test(medYear)) {
+        alert('Please enter a valid year date.');
+        return;
+    }
+    
 
     // Get the medication key if it exists
     var medKey = document.getElementById('medKey').value;

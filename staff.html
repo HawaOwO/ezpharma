@@ -105,10 +105,10 @@
             <div class="details">
                 <div class="recentOrders">
                     <div class="cardHeader">
-                        <h2>Active user</h2>
+                        <h2>Active user</h2>                       
                         <a href="#" class="btn" onclick="openModal()">Add new </a>
-                        
                     </div>
+                    <h3 style="color: rgb(22, 11, 237);">Highlighted items indicate the admins</h3>
 
                     <table>
                         <thead>
@@ -212,6 +212,28 @@
     var newPassword = document.getElementById('newPassword').value;
     var newPhone = document.getElementById('newPhone').value;
     var newRole = document.getElementById('newRole').value;
+
+     // Validate the input fields
+     if (newFirstName === '' || newLastName === '' || newEmail === '' || newPassword === '' || newPhone === '') {
+        alert('Please fill out all the required fields.');
+        return;
+    }
+
+    // Validate email format
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(newEmail)) {
+        alert('Please enter a valid email address.');
+        return;
+    }
+
+    // Validate phone number format (assuming it should be numeric)
+    var phoneRegex = /^\d+$/;
+    if (!phoneRegex.test(newPhone)) {
+        alert('Please enter a valid phone number.');
+        return;
+    }
+
+
 
     // Generate username using first name and last name
     var newUsername = newFirstName + newLastName;

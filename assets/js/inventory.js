@@ -34,7 +34,8 @@ function populateMedicationData(snapshot) {
         // Combine day, month, and year in one line
         const date = `${med.day} ${med.month} ${med.year}`;
         if (med.quantity <20) {
-            newRow.style.backgroundColor = '#fff7df'; // Yellow background for Admin
+            newRow.style.backgroundColor = '#fff7df';
+            newRow.classList.add('highlight-row'); // Yellow background for Admin
         } 
         newRow.innerHTML = `
             <td>${med.name}</td>

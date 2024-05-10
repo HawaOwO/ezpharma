@@ -96,9 +96,7 @@ document.addEventListener('DOMContentLoaded', populateLowStockMedications);
 
 function updateCardNumbers() {
     // Get today's date
-    const today = new Date().toLocaleDateString();
-
-    // Fetch data from the database and update the cards accordingly
+    const today = new Date().toISOString().slice(0, 10);    // Fetch data from the database and update the cards accordingly
     get(recordRef).then((snapshot) => {
         let dailyUseCount = 0;
         let medTodayQuantity = 0;
@@ -107,10 +105,11 @@ function updateCardNumbers() {
         // Loop through each record
         snapshot.forEach((childSnapshot) => {
             const record = childSnapshot.val();
-            // Check if the record date matches today's date
-            if (record.date === today) {
+            // Extract the date portion from record.date and format it as "YYYY-MM-DD"
+            const recordDate = record.date.slice(0, 10);            // Check if the record date matches today's date
+            if (recordDate === today) {
                 dailyUseCount++; // Increment daily use count if the date matches today
-                medTodayQuantity += record.quantityR; // Add quantityR to medTodayQuantity for records with today's date
+                medTodayQuantity += parseInt(record.quantityR); // Add quantityR to medTodayQuantity for records with today's date
             }
             
         });
@@ -143,46 +142,6 @@ function updateCardNumbers() {
 document.addEventListener('DOMContentLoaded', updateCardNumbers);
 
 
-// // Add event listener to the button
-// downloadReportBtn.addEventListener('click', () => {
-//     // Get the table content
-//     const table = document.querySelector('table');
-//     const tableContent = table.outerHTML;
-
-//     // Create a Blob with the table content
-//     const blob = new Blob([tableContent], { type: 'text/html' });
-
-//     // Create a link element
-//     const downloadLink = document.createElement('a');
-//     downloadLink.href = URL.createObjectURL(blob);
-
-//     // Set the file name
-//     downloadLink.download = 'report.html';
-
-//     // Append the link to the body and trigger the download
-//     document.body.appendChild(downloadLink);
-//     downloadLink.click();
-
-//     // Cleanup
-//     document.body.removeChild(downloadLink);
-// });
-
-
-
-// Get a reference to the download button
-// const downloadReportBtn = document.getElementById('downloadReportBtn');
-
-// // Add event listener to the button
-// downloadReportBtn.addEventListener('click', () => {
-//     // Initialize jsPDF
-//     const doc = new jsPDF();
-
-//     // Add the table content to the PDF
-//     doc.autoTable({ html: 'table' });
-
-//     // Save the PDF
-//     doc.save('report.pdf');
-// });
 document.addEventListener('DOMContentLoaded', function () {
     const downloadButton = document.getElementById('downloadReportBtn');
     
