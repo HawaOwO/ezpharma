@@ -27,6 +27,7 @@ function populateRecordData(snapshot) {
             <td>${record.name}</td>
             <td>${record.quantityR}</td>
             <td>${record.date}</td>
+            <td>${record.email}</td>
             
             
         `;
