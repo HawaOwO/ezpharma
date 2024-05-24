@@ -35,7 +35,7 @@ function populateMedicationData(snapshot) {
         const date = `${med.day} ${med.month} ${med.year}`;
         if (med.quantity <20) {
             newRow.style.backgroundColor = '#fff7df';
-            newRow.classList.add('highlight-row'); // Yellow background for Admin
+            newRow.classList.add('highlight-row'); // Yellow background 
         } 
         newRow.innerHTML = `
             <td>${med.name}</td>

@@ -241,6 +241,11 @@
   measurementId: "G-TVTLCXW8WE"
 };
 
+function closeModal() {
+    const modal = document.getElementById('addMedModal');
+    modal.style.display = 'none';
+}
+
     // Initialize Firebase
      const app = initializeApp(firebaseConfig);
      const database = getDatabase(app);

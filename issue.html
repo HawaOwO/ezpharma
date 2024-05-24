@@ -215,6 +215,11 @@
     measurementId: "G-TVTLCXW8WE"
   };
   
+  // Function to close the modal
+function closeModal() {
+    const modal = document.getElementById('addIssueModal');
+    modal.style.display = 'none';
+}
       // Initialize Firebase
        const app = initializeApp(firebaseConfig);
        const database = getDatabase(app);

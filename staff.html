@@ -199,6 +199,11 @@
     appId: "1:365392282595:web:9af6ec80ca1545a61616d6",
     measurementId: "G-TVTLCXW8WE"
   };
+
+  function closeModal() {
+    const modal = document.getElementById('addUserModal');
+    modal.style.display = 'none';
+}
   
       // Initialize Firebase
        const app = initializeApp(firebaseConfig);
