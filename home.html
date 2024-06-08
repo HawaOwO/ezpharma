@@ -411,7 +411,7 @@ function updateCardNumbers() {
       // Loop through each medication to count low stock items
       snapshot.forEach((medSnapshot) => {
           const medication = medSnapshot.val();
-          if (medication.quantity < 20) {
+          if (medication.quantity < 21) {
               lowStockCount++;
           }
       });

@@ -33,7 +33,7 @@ function populateMedicationData(snapshot) {
         const newRow = document.createElement('tr');
         // Combine day, month, and year in one line
         const date = `${med.day} ${med.month} ${med.year}`;
-        if (med.quantity <20) {
+        if (med.quantity <21) {
             newRow.style.backgroundColor = '#fff7df';
             newRow.classList.add('highlight-row'); // Yellow background 
         } 

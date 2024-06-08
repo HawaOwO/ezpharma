@@ -74,7 +74,7 @@ function populateLowStockMedications() {
         // Loop through each medication to check for low stock items
         snapshot.forEach((medSnapshot) => {
             const medication = medSnapshot.val();
-            if (medication.quantity < 20) {
+            if (medication.quantity < 21) {
                 // Create a new table row for each medication
                 const newRow = document.createElement('tr');
                 // Populate the table row with medication data
@@ -129,7 +129,7 @@ function updateCardNumbers() {
         // Loop through each medication to count low stock items
         snapshot.forEach((medSnapshot) => {
             const medication = medSnapshot.val();
-            if (medication.quantity < 20) {
+            if (medication.quantity < 21) {
                 medOutOfStock++;
             }
         });
