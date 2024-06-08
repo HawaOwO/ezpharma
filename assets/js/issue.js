@@ -33,8 +33,12 @@ function populateIssueData(snapshot) {
         // Combine day, month, and year in one line
         const date = `${issue.day} ${issue.month} ${issue.year}`;
         if (issue.status === 'UNSOLVED') {
-            newRow.style.backgroundColor = '#fffcf2';
+            newRow.style.backgroundColor = '#FFA5BD';
             newRow.classList.add('highlight-row'); // Yellow background for Admin
+        }
+        else{
+            newRow.style.backgroundColor='#A2E8ED';
+            newRow.classList.add('highlight-row');
         } 
         
         newRow.innerHTML = `

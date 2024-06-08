@@ -46,7 +46,7 @@ function populateUserData(snapshot) {
         const newRow = document.createElement('tr');
         // Apply different background colors based on the user's role
         if (user.role === 'Admin') {
-            newRow.style.backgroundColor = '#fffcf2'; 
+            newRow.style.backgroundColor = '#A2E8ED'; 
             newRow.classList.add('highlight-row');// Yellow background for Admin
         } 
         newRow.innerHTML = `
