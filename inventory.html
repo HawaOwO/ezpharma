@@ -278,6 +278,20 @@ function closeModal() {
         alert('Please enter a valid year date.');
         return;
     }
+
+    // Validate day number is more than 0
+    if (medDay <= 0) {
+        alert('Please enter a valid day date.');
+        return;
+    }
+
+    // Get the current year
+    var currentYear = new Date().getFullYear();
+
+    // Validate year number is 2024 or above
+    if (medYear < currentYear) {
+        alert(`Please enter a valid year date of ${currentYear} or above.`);        return;
+    }
     
     // Get the medication key if it exists
     var medKey = document.getElementById('medKey').value;
@@ -296,6 +310,7 @@ function closeModal() {
         }).then(() => {
             alert('Medication updated successfully');
             closeModal(); // Close the modal after successful update
+            location.reload();
         }).catch((error) => {
             console.error("Error updating medication:", error);
         });
@@ -316,6 +331,9 @@ function closeModal() {
         }).then(() => {
             alert('Medication saved successfully');
             closeModal(); // Close the modal after successful save
+            // Force a page refresh
+            location.reload();
+
         }).catch((error) => {
             console.error("Error saving medication:", error);
         });

@@ -69,6 +69,7 @@ function deleteUser(userKey) {
         remove(ref(database, `User/${userKey}`)).then(() => {
             // Medication deleted successfully
             alert("User deleted successfully");
+            refreshUserData();
         }).catch((error) => {
             // Error occurred while deleting medication
             console.error("Error deleting user:", error);
@@ -77,6 +78,17 @@ function deleteUser(userKey) {
     }
 }
 
+function refreshUserData() {
+    // Retrieve data once and populate the table
+    get(usersRef).then((snapshot) => {
+        populateUserData(snapshot);
+    }).catch((error) => {
+        console.error("Error getting data:", error);
+    });
+}
+
+// Retrieve data once and populate the table
+refreshUserData();
 
 // Retrieve data once and populate the table
 get(usersRef).then((snapshot) => {
@@ -102,9 +114,8 @@ document.addEventListener('DOMContentLoaded', function () {
             event.preventDefault(); // Prevent the form from submitting
 
             // Validate and handle the form submission here
-            addNewUser();
+            addNewUser(); 
     });
-
 });
 });
 

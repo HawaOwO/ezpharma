@@ -223,7 +223,7 @@ function closeModal() {
       // Initialize Firebase
        const app = initializeApp(firebaseConfig);
        const database = getDatabase(app);
-  
+
       saveData.addEventListener('click',(e) => {
       var issueName = document.getElementById('issueName').value;
       var issueDescription = document.getElementById('issueDescription').value;
@@ -252,6 +252,20 @@ function closeModal() {
         return;
     }
 
+    // Validate day number is more than 0
+    if (issueDay <= 0) {
+        alert('Please enter a valid day date.');
+        return;
+    }
+
+    // Get the current year
+    var currentYear = new Date().getFullYear();
+
+    // Validate year number is 2024 or above
+    if (issueYear < currentYear) {
+        alert(`Please enter a valid year date of ${currentYear} or above.`);        
+        return;
+    }
 
 // Get the medication key if it exists
     var issueKeyElement = document.getElementById('issueKey');
@@ -272,6 +286,7 @@ function closeModal() {
     }).then(() => {
         alert('Issue saved successfully');
         closeModal(); // Close the modal after successful save
+        location.reload();
     }).catch((error) => {
         console.error("Error saving issue:", error);
     });

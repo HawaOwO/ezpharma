@@ -238,8 +238,6 @@
         return;
     }
 
-
-
     // Generate username using first name and last name
     var newUsername = newFirstName + newLastName;
 
@@ -261,6 +259,8 @@
             }).then(() => {
                 closeModal();
                 alert('User added successfully!');
+                location.reload();
+                
             }).catch((error) => {
                 console.error('Error saving user data:', error.message);
                 alert('New user added');

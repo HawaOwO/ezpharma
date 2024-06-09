@@ -58,6 +58,7 @@ function deleteMedication(medKey) {
         remove(ref(database, `Medication/${medKey}`)).then(() => {
             // Medication deleted successfully
             alert("Medication deleted successfully");
+            refreshMedicationData();
         }).catch((error) => {
             // Error occurred while deleting medication
             console.error("Error deleting medication:", error);
@@ -90,6 +91,7 @@ function editMedication(medKey) {
 
         // Open the modal for editing
         openModal();
+        refreshMedicationData();
     }).catch((error) => {
         // Error occurred while fetching medication data
         console.error("Error fetching medication data:", error);
@@ -97,7 +99,17 @@ function editMedication(medKey) {
     });
 }
 
+function refreshMedicationData() {
+    // Retrieve data once and populate the table
+    get(medicationRef).then((snapshot) => {
+        populateMedicationData(snapshot);
+    }).catch((error) => {
+        console.error("Error getting data:", error);
+    });
+}
 
+// Retrieve data once and populate the table
+refreshMedicationData();
 // // Retrieve data once and populate the table
 get(medicationRef).then((snapshot) => {
     populateMedicationData(snapshot);

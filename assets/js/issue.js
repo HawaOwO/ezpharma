@@ -47,6 +47,7 @@ function populateIssueData(snapshot) {
             <td>${issue.username}</td>
             <td>${issue.status}</td>
             <td>${date}</td>
+            <td><button class="edit-button" data-key="${issueSnapshot.key}">Solve</button></td>
             <td><button class="delete-button" data-key="${issueSnapshot.key}"  style="background-color: red; color: white;">Delete</button></td>
             
         `;
@@ -61,6 +62,7 @@ function deleteIssue(issueKey) {
         remove(ref(database, `Issue/${issueKey}`)).then(() => {
             // Issue deleted successfully
             alert("Issue deleted successfully");
+            refreshIssueData();
         }).catch((error) => {
             // Error occurred while deleting 
             console.error("Error deleting issue:", error);
@@ -100,6 +102,31 @@ function editIssue(issueKey) {
     });
 }
 
+function solveIssue(issueKey) {
+    const issueRef = ref(database, `Issue/${issueKey}`);
+    update(issueRef, { status: 'SOLVED' }).then(() => {
+        // Status updated successfully
+        alert("Issue status updated to SOLVED");
+        // Refresh the table data
+        refreshIssueData();
+    }).catch((error) => {
+        // Error occurred while updating
+        console.error("Error updating issue:", error);
+    });
+}
+
+function refreshIssueData() {
+    // Retrieve data once and populate the table
+    get(issueRef).then((snapshot) => {
+        populateIssueData(snapshot);
+    }).catch((error) => {
+        console.error("Error getting data:", error);
+    });
+}
+
+// Retrieve data once and populate the table
+refreshIssueData();
+
 // Retrieve data once and populate the table
 get(issueRef).then((snapshot) => {
     populateIssueData(snapshot);
@@ -133,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function () {
 document.addEventListener('click', function(event) {
     if (event.target.classList.contains('edit-button')) {
         const issueKey = event.target.dataset.key;
-        editIssue(issueKey);
+        solveIssue(issueKey);
     }
 });
 
